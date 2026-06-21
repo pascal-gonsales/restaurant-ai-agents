@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / cached files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test / coverage artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Runtime data and credentials (never commit real data)
+data/
+output/
+prospects/
+credentials.env
+*.env
+!.gitignore
+
+# Editor / OS noise
+.idea/
+.vscode/
+.DS_Store
+*.swp
