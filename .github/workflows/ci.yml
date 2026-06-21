@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Tests and discipline gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pytest requests
+
+      - name: Syntax check traffic_scout
+        run: python -m py_compile performance-audit/scripts/traffic_scout.py
+
+      - name: Run test suite (discipline gate)
+        run: python -m pytest tests/ -v
+
+      - name: Smoke run traffic_scout (must exit 0 unconfigured)
+        env:
+          FOOT_TRAFFIC_API_KEY: smoke-test-key
+        run: |
+          python performance-audit/scripts/traffic_scout.py
+          echo "traffic_scout exited cleanly"
