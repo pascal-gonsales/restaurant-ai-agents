@@ -112,6 +112,10 @@ attribution is the `{{REPORT_BRAND}}` placeholder, the call-to-action is the
 `<RESTAURANT_NAME>` / `<CITY>` / `<REGION>` placeholders until configured at
 runtime. Real values live in the user's local data folder, never in the repo.
 
+## Security and development
+
+This repository was built clean-room: it contains only synthetic demo data and no real client, venue, or financial information. Two gates keep it that way. A local pre-commit hook blocks any commit that contains a private real-data token, and a CI workflow (`.github/workflows/secret-scan.yml`) runs gitleaks on every push and pull request and fails on any secret or credential finding.
+
 ## License
 
 MIT. See `LICENSE`.
