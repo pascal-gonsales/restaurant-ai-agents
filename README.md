@@ -5,9 +5,7 @@ three independent agent teams that each turn raw restaurant data into a
 decision-ready deliverable, built around one non-negotiable rule: every number
 traces to a source, and missing data is declared, never invented.
 
-Authored under the **WwithAI** brand. Brand attribution in the agents is the
-runtime placeholder `{{REPORT_BRAND}}`, so anyone can run the system under
-their own name.
+Brand attribution in the agents is a runtime placeholder (`{{REPORT_BRAND}}`), so anyone can run the system under their own name.
 
 ## What it does
 
