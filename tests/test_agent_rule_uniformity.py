@@ -1,9 +1,10 @@
-"""Agent-prompt discipline net.
+"""Structural prompt lint.
 
-These tests are the load-bearing CI gate. They fail the build if any agent
-prompt loses its anti-fabrication ABSOLUTE RULES section, drops its Role
-section, hardcodes a brand attribution string instead of the
-{{REPORT_BRAND}} placeholder, or if the team prompt counts drift.
+These tests fail the build if any agent prompt loses its anti-fabrication
+ABSOLUTE RULES section, drops its Role section, hardcodes a brand attribution
+string instead of the {{REPORT_BRAND}} placeholder, or if the team prompt
+counts drift. They verify the written contract is present in every prompt;
+they do not test model behavior against the contract.
 """
 
 import re

@@ -21,7 +21,8 @@ Environment variables:
                          Optional neighborhood for a second competitor query.
   OUTPUT_DIR             Where traffic-raw.json is written
                          (default: <repo>/performance-audit/output).
-  MAX_API_CALLS          Hard ceiling on API calls per run (default: 9).
+  MAX_API_CALLS          Ceiling on API calls per run (default: 9). Values
+                         above 10 are clamped to 10, the per-audit budget.
 
 Exit codes:
   0  success, or the script is unconfigured (placeholder target, no HTTP).
@@ -56,7 +57,10 @@ COMPETITOR_NEIGHBORHOOD = os.environ.get("COMPETITOR_NEIGHBORHOOD", "")
 _DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output"
 OUTPUT_DIR = Path(os.environ.get("OUTPUT_DIR", str(_DEFAULT_OUTPUT_DIR)))
 
-MAX_API_CALLS = int(os.environ.get("MAX_API_CALLS", "9"))
+# The per-audit budget is 10 calls (see agents/traffic-scout.md, rule 8).
+# The env var can lower the ceiling but never raise it above the budget.
+_HARD_CALL_CEILING = 10
+MAX_API_CALLS = min(int(os.environ.get("MAX_API_CALLS", "9")), _HARD_CALL_CEILING)
 
 API_BASE_URL = os.environ.get(
     "FOOT_TRAFFIC_API_BASE", "https://api.example.com/maps/search-v3"
