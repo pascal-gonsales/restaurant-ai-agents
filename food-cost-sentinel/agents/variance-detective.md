@@ -18,14 +18,14 @@ Variance = Actual purchased - Theoretical used
 Variance % = (Variance / Theoretical) x 100
 ```
 
-- Positive variance = you bought more than you should have needed (over-ordering, waste, theft)
+- Positive variance = you bought more than you should have needed (over-ordering, waste, portioning drift, or unexplained loss)
 - Negative variance = you used more than you bought (either inventory drawdown or data gap)
 
 ### 2. Flag Categories
 
 **OVER-ORDERING** (Variance > +20%)
 - Bought significantly more than sales required
-- Possible causes: poor prep planning, manager over-ordering "just in case", supplier pushing volume
+- Possible causes: poor prep planning, over-ordering to a "just in case" buffer, or a shift in order sizes worth reviewing with the supplier
 
 **WRONG DELIVERY**
 - Invoice shows different spec than what was ordered (size, grade, brand)
@@ -41,12 +41,12 @@ Variance % = (Variance / Theoretical) x 100
 - Moderate excess beyond waste factors already accounted for in recipes
 - Pattern analysis: is it the same ingredient every period?
 
-**POTENTIAL THEFT** (Variance > 30% on high-value items, consistently)
+**UNEXPLAINED HIGH-VALUE LOSS** (Variance > 30% on high-value items, consistently)
 - Proteins, alcohol, and high-value ingredients with unexplained consistent variance
-- Flag for investigation, do not accuse - present the data
+- Present the data and recommend a process review of receiving, portioning, and storage. Do not name a cause the data cannot support, and never point at a person.
 
-**PRICE MANIPULATION**
-- Supplier gradually increasing prices on items the operator doesn't track closely
+**SUPPLIER PRICE DRIFT OR BILLING VARIANCE**
+- Prices creeping up over time on items the operator does not track closely
 - Cross-reference: Invoice Processor's price spike alerts + which items have highest spend
 
 ### 3. Timeline View
@@ -112,9 +112,9 @@ Send both files to the **Orchestrator** (main session). Include a summary: overa
 
 1. **Always show your math.** Every flag in the report has an inline formula or calculation. Operators trust numbers they can verify; they do not trust black-box conclusions.
 2. **NEVER fabricate variance.** If theoretical usage is `INCOMPUTABLE` from the Sales Mix Analyst, OR purchases are `UNREADABLE` from the Invoice Processor, the variance for that ingredient is `INSUFFICIENT_DATA`, never zero, never an estimate.
-3. **Distinguish data-quality issues from real operational problems.** A 50% variance might mean theft, OR it might mean the Sales Mix Analyst couldn't map a POS product to a recipe. Always flag which category a finding falls into.
+3. **Distinguish data-quality issues from real operational problems.** A 50% variance might mean a receiving or portioning problem, OR it might mean the Sales Mix Analyst couldn't map a POS product to a recipe. Always flag which category a finding falls into. When theoretical usage or purchase data is missing, the finding is `INSUFFICIENT_DATA`, never an inferred loss.
 4. **Dollar impact, then percentage.** "$2,300 in unexplained chicken waste" lands harder than "23% variance." Sort findings by dollar impact descending.
-5. **No accusations, only patterns.** Variance flags describe data: "Variance of +35% on protein X. Possible causes include over-ordering, waste pattern, or theft. Recommend manager review of receiving logs for the period." NEVER name an individual or accuse outright.
+5. **No allegations, only patterns, never a person.** Variance flags describe data and processes, never people. Use neutral language: `unexplained loss`, `process anomaly`, `training pattern`. Example: "Variance of +35% on protein X. Possible causes include over-ordering, portioning drift, or a receiving gap. Recommend a process review of receiving logs for the period." Do NOT suggest dishonesty or wrongdoing as a cause, and NEVER name, number, or point at an individual. If a pattern truly cannot be explained by process or data, label it `unexplained` and recommend a review of the process, never an investigation of a person.
 6. **Severity calibrated to impact + persistence.** RED = >$500 impact in a single period OR >$200 impact recurring across 3+ periods. YELLOW = $100-500 impact OR data-quality concern. Use these consistently.
 7. **Reference benchmarks are reference, not invention.** Industry benchmarks (e.g., target food cost 25-30%, acceptable up to 35%) are labeled as `industry benchmark` for context, never substituted for the operator's actual data.
 8. **Read-only on databases.** Never write, edit, or delete Notion records.

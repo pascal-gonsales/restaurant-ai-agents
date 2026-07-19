@@ -71,8 +71,8 @@ for row in ws.iter_rows(min_row=2, values_only=True):  # skip header
 - Look at first 5 rows to identify the header row (it's not always row 1)
 
 ### PDF Files
-- PDF financial statements cannot be directly parsed with Python in Claude
-- Instead: read the PDF visually, extract the key numbers manually
+- If the runtime cannot parse a PDF financial statement programmatically, do not force it
+- Instead: read the PDF, extract the key numbers, and record where each came from
 - Always note: "Source: [filename].pdf, page [X]" for every number extracted
 - If a PDF table is unclear or ambiguous, note the ambiguity rather than guessing
 
@@ -126,6 +126,7 @@ Run ONLY the analyses that the data supports. Skip sections entirely rather than
 **Revenue Analysis (requires Tier 2+):**
 - Total revenue by month (create a 12-month table if data covers a full year)
 - Revenue trend: calculate month-over-month % change, state if growing/flat/declining
+- A short contiguous spike (a few days or a couple of weeks that then returns to baseline) is NOT a trend. Report it separately with its exact dates and dollar effect, state that the cause is not in the data, and surface it as the top owner question. Do not fold it into the ordinary trend and do not extrapolate it. A recurring event only becomes a baseline once recurrence or owner context confirms it.
 - Identify the best month and worst month with actual numbers
 - If Tier 3+: Revenue by day of week (sum all Mondays, all Tuesdays, etc. - create a ranked table)
 - If Tier 3+: Revenue by hour (if hourly data exists - create an hourly distribution)
@@ -149,8 +150,9 @@ Run ONLY the analyses that the data supports. Skip sections entirely rather than
 **Integrity Analysis (requires void/discount reports):**
 - Void % of gross sales (overall and by month)
 - Discount % of gross sales (overall and by month)
-- If employee-level data exists: rank employees by void $ amount, flag anyone with void % > 2x the team average
-- If day/time data exists: flag any day or shift with disproportionate voids
+- Before any ranking, separate corrections made before an item was sent to the kitchen from voids of items that were already sent. A blank "sent to kitchen" timestamp marks a pre-send correction. Pre-send corrections are a workflow and training signal, not lost sales, and are reported as their own rate. Only post-send voids count toward the void rate. Report post-send voids as "post-send voided menu value," not as a loss or a food cost: a void establishes that an item was reversed, not that food was cooked or discarded, and cost cannot be inferred without COGS data. If the data does not let you separate the two classes, report the combined figure as INSUFFICIENT_DATA for integrity purposes and stop there.
+- Client-facing outputs report voids at the aggregate and process level only. Do not include a per-person ranking or any staff identifier in the deliverable. If employee-level data exists, you may compute a post-send-only distribution as internal working notes to check whether the spread is uniform (a process signature) or concentrated, but the deliverable states only the conclusion ("uniform across the team, so this is a process control gap" or "concentrated, recommend a process review of the workflow"), never a name, number, or rank tied to a person. A high raw count that is mostly pre-send corrections is a training pattern, not a flag.
+- If day/time data exists: flag any day or shift with disproportionate post-send voids
 
 **For Tier 1 only (minimal data):**
 - State clearly: "Limited to Tier 1 analysis. Only annual/basic numbers available."
