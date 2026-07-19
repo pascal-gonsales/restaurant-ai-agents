@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-06-11,21:49:02,Server 2,ORD_0611_01,Pasta Special,1,26.48,Kitchen issue,,21:49:02,
+2025-06-11,15:14:40,Server 4,ORD_0611_02,Beef Bowl,1,25.68,Order error,,15:14:40,MGR_01
+2025-06-11,11:31:05,Server 1,ORD_0611_03,Grilled Chicken Plate,1,28.43,Guest request,11:27:05,11:31:05,
+2025-06-11,13:28:53,Server 2,ORD_0611_04,Beef Bowl,1,8.36,Price adjust,13:08:53,13:28:53,

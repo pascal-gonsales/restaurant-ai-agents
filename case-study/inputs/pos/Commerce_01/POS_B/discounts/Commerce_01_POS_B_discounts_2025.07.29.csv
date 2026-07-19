@@ -1,0 +1,3 @@
+business_date,discount_ref,discount_label,use_count,eligible_sales,discount_value,approval_ref
+2025-07-29,DSC_01,Loyalty Credit,16,3142.16,147.49,yes
+2025-07-29,DSC_02,Set Menu Adjustment,10,1925.84,90.39,no

@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-02-17,18:15:41,Server 4,ORD_0217_01,Soup of the Day,1,30.80,Item changed,18:01:41,18:15:41,MGR_01
+2025-02-17,18:59:39,Server 4,ORD_0217_02,Soft Drink,1,26.35,Kitchen issue,18:41:39,18:59:39,MGR_03
+2025-02-17,22:45:09,Server 3,ORD_0217_03,House Salad,1,13.95,Order error,22:41:09,22:45:09,MGR_02
+2025-02-17,15:04:43,Server 5,ORD_0217_04,Soft Drink,1,29.33,Price adjust,14:50:43,15:04:43,MGR_03

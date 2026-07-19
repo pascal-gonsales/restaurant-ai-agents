@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-05-09,17:40:46,Server 3,ORD_0509_01,Beef Bowl,1,27.73,Item changed,17:20:46,17:40:46,MGR_02
+2025-05-09,20:58:05,Server 1,ORD_0509_02,House Salad,1,13.39,Item changed,20:54:05,20:58:05,MGR_01
+2025-05-09,18:24:32,Server 1,ORD_0509_03,Pasta Special,1,19.50,Price adjust,18:12:32,18:24:32,
+2025-05-09,16:09:39,Server 3,ORD_0509_04,Beef Bowl,1,6.60,Price adjust,15:49:39,16:09:39,MGR_03

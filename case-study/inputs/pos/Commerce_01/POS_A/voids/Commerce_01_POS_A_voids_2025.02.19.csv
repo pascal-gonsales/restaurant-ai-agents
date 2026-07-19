@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-02-19,22:39:12,Server 3,ORD_0219_01,Soup of the Day,1,25.44,Price adjust,22:37:12,22:39:12,MGR_02
+2025-02-19,12:24:41,Server 5,ORD_0219_02,Grilled Chicken Plate,1,11.71,Kitchen issue,12:22:41,12:24:41,MGR_02
+2025-02-19,15:15:30,Server 5,ORD_0219_03,Grilled Chicken Plate,1,22.47,Kitchen issue,15:08:30,15:15:30,MGR_02
+2025-02-19,14:13:43,Server 3,ORD_0219_04,Grilled Chicken Plate,1,25.45,Kitchen issue,14:07:43,14:13:43,MGR_01

@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-06-09,11:53:16,Server 1,ORD_0609_01,House Salad,1,9.02,Item changed,,11:53:16,
+2025-06-09,11:25:06,Server 1,ORD_0609_02,Soft Drink,1,26.35,Price adjust,,11:25:06,
+2025-06-09,22:20:58,Server 4,ORD_0609_03,Veggie Wrap,1,31.88,Price adjust,22:15:58,22:20:58,
+2025-06-09,11:27:51,Server 3,ORD_0609_04,House Salad,1,15.73,Kitchen issue,11:24:51,11:27:51,

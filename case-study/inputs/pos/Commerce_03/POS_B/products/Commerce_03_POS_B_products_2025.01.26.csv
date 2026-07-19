@@ -1,0 +1,9 @@
+business_date,sku,product_name,category_name,units,unit_price,gross_sales,discount_value,net_sales
+2025-01-26,SKU_001,House Salad,Starters,31,12.00,372.00,16.15,355.85
+2025-01-26,SKU_002,Soup of the Day,Starters,26,9.00,234.00,11.38,222.62
+2025-01-26,SKU_003,Grilled Chicken Plate,Mains,42,22.00,924.00,38.44,885.56
+2025-01-26,SKU_004,Pasta Special,Mains,40,19.00,760.00,34.33,725.67
+2025-01-26,SKU_005,Beef Bowl,Mains,35,24.00,840.00,43.99,796.01
+2025-01-26,SKU_006,Veggie Wrap,Mains,29,16.00,464.00,25.39,438.61
+2025-01-26,SKU_007,Dessert Plate,Desserts,48,8.00,384.00,16.38,367.62
+2025-01-26,SKU_008,Soft Drink,Beverages,70,4.00,280.00,13.87,266.13

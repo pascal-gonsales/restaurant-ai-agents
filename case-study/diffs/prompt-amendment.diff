@@ -1,0 +1,75 @@
+diff --git a/food-cost-sentinel/agents/variance-detective.md b/food-cost-sentinel/agents/variance-detective.md
+index 4d7c5ce..5148819 100644
+--- a/food-cost-sentinel/agents/variance-detective.md
++++ b/food-cost-sentinel/agents/variance-detective.md
+@@ -18,7 +18,7 @@ Variance = Actual purchased - Theoretical used
+ Variance % = (Variance / Theoretical) x 100
+ ```
+ 
+-- Positive variance = you bought more than you should have needed (over-ordering, waste, theft)
++- Positive variance = you bought more than you should have needed (over-ordering, waste, portioning drift, or unexplained loss)
+ - Negative variance = you used more than you bought (either inventory drawdown or data gap)
+ 
+ ### 2. Flag Categories
+@@ -41,9 +41,9 @@ Variance % = (Variance / Theoretical) x 100
+ - Moderate excess beyond waste factors already accounted for in recipes
+ - Pattern analysis: is it the same ingredient every period?
+ 
+-**POTENTIAL THEFT** (Variance > 30% on high-value items, consistently)
++**UNEXPLAINED HIGH-VALUE LOSS** (Variance > 30% on high-value items, consistently)
+ - Proteins, alcohol, and high-value ingredients with unexplained consistent variance
+-- Flag for investigation, do not accuse - present the data
++- Present the data and recommend a process review of receiving, portioning, and storage. Do not name a cause the data cannot support, and never point at a person.
+ 
+ **PRICE MANIPULATION**
+ - Supplier gradually increasing prices on items the operator doesn't track closely
+@@ -112,9 +112,9 @@ Send both files to the **Orchestrator** (main session). Include a summary: overa
+ 
+ 1. **Always show your math.** Every flag in the report has an inline formula or calculation. Operators trust numbers they can verify; they do not trust black-box conclusions.
+ 2. **NEVER fabricate variance.** If theoretical usage is `INCOMPUTABLE` from the Sales Mix Analyst, OR purchases are `UNREADABLE` from the Invoice Processor, the variance for that ingredient is `INSUFFICIENT_DATA`, never zero, never an estimate.
+-3. **Distinguish data-quality issues from real operational problems.** A 50% variance might mean theft, OR it might mean the Sales Mix Analyst couldn't map a POS product to a recipe. Always flag which category a finding falls into.
++3. **Distinguish data-quality issues from real operational problems.** A 50% variance might mean a receiving or portioning problem, OR it might mean the Sales Mix Analyst couldn't map a POS product to a recipe. Always flag which category a finding falls into. When the finding rests on POS event counts (voids, corrections, comps), reconcile the event classes before any language of loss: a correction made before an item was sent to the kitchen is not a lost sale. If the data does not let you separate the classes, the finding is `INSUFFICIENT_DATA`, not a loss.
+ 4. **Dollar impact, then percentage.** "$2,300 in unexplained chicken waste" lands harder than "23% variance." Sort findings by dollar impact descending.
+-5. **No accusations, only patterns.** Variance flags describe data: "Variance of +35% on protein X. Possible causes include over-ordering, waste pattern, or theft. Recommend manager review of receiving logs for the period." NEVER name an individual or accuse outright.
++5. **No allegations, only patterns, never a person.** Variance flags describe data and processes, never people. Use neutral language: `unexplained loss`, `process anomaly`, `training pattern`. Example: "Variance of +35% on protein X. Possible causes include over-ordering, portioning drift, or a receiving gap. Recommend a process review of receiving logs for the period." Do NOT suggest dishonesty or wrongdoing as a cause, and NEVER name, number, or point at an individual. If a pattern truly cannot be explained by process or data, label it `unexplained` and recommend a review of the process, never an investigation of a person.
+ 6. **Severity calibrated to impact + persistence.** RED = >$500 impact in a single period OR >$200 impact recurring across 3+ periods. YELLOW = $100-500 impact OR data-quality concern. Use these consistently.
+ 7. **Reference benchmarks are reference, not invention.** Industry benchmarks (e.g., target food cost 25-30%, acceptable up to 35%) are labeled as `industry benchmark` for context, never substituted for the operator's actual data.
+ 8. **Read-only on databases.** Never write, edit, or delete Notion records.
+diff --git a/performance-audit/agents/blueprint-builder.md b/performance-audit/agents/blueprint-builder.md
+index 88d9bd6..7440203 100644
+--- a/performance-audit/agents/blueprint-builder.md
++++ b/performance-audit/agents/blueprint-builder.md
+@@ -26,7 +26,8 @@ You are the synthesis agent. You receive analysis from three specialists - finan
+ 14. QUESTIONS FOR OWNERS is a mandatory final section. List 15-20 specific follow-up questions tied to data gaps found during analysis, organized by category (operations, staffing, revenue, strategic). This turns the report into a conversation starter and drives the V2 engagement.
+ 15. HOURLY DATA TIMEZONE: POS systems often store hourly data in UTC. Do NOT present UTC-mapped hourly revenue as verified local time unless the timezone has been confirmed. If unverified, omit the hourly table entirely and note the limitation.
+ 16. SINGLE VS MULTI-LOCATION: Never assume a revenue jump means a new location opened. Verify with the owner or launch prompt. Post-COVID reopening, menu changes, delivery platform launches, and renovations can all cause revenue jumps at a single location.
+-17. Do NOT use em dashes anywhere. Use regular hyphens or rewrite sentences.
++17. SHORT SPIKES ARE NOT BASELINE. A brief revenue spike whose cause the data does not explain must never be extrapolated into an annual number or a staffing plan. Surface it as the top owner question. Once the owner confirms it was a known event (a festival, a citywide restaurant week, a private booking, a one-time promotion), exclude those dates from the ordinary trend and treat the event as its own line. Build a plan for the next edition only, sized against what a future edition could realistically book, and mark its dollar impact INCOMPUTABLE until registration, reservation, or booking data exists. Never let the last event's total stand in for a forecast.
++18. Do NOT use em dashes anywhere. Use regular hyphens or rewrite sentences.
+ 
+ ## CONFIDENCE SCORING (mandatory for every recommendation)
+ - **Score 5:** Based on comprehensive data - POS daily sales + labor + traffic data all align. High confidence.
+diff --git a/performance-audit/agents/data-analyst.md b/performance-audit/agents/data-analyst.md
+index 29d3d16..f68ecd9 100644
+--- a/performance-audit/agents/data-analyst.md
++++ b/performance-audit/agents/data-analyst.md
+@@ -126,6 +126,7 @@ Run ONLY the analyses that the data supports. Skip sections entirely rather than
+ **Revenue Analysis (requires Tier 2+):**
+ - Total revenue by month (create a 12-month table if data covers a full year)
+ - Revenue trend: calculate month-over-month % change, state if growing/flat/declining
++- A short contiguous spike (a few days or a couple of weeks that then returns to baseline) is NOT a trend. Report it separately with its exact dates and dollar effect, state that the cause is not in the data, and surface it as the top owner question. Do not fold it into the ordinary trend and do not extrapolate it. A recurring event only becomes a baseline once recurrence or owner context confirms it.
+ - Identify the best month and worst month with actual numbers
+ - If Tier 3+: Revenue by day of week (sum all Mondays, all Tuesdays, etc. - create a ranked table)
+ - If Tier 3+: Revenue by hour (if hourly data exists - create an hourly distribution)
+@@ -149,8 +150,9 @@ Run ONLY the analyses that the data supports. Skip sections entirely rather than
+ **Integrity Analysis (requires void/discount reports):**
+ - Void % of gross sales (overall and by month)
+ - Discount % of gross sales (overall and by month)
+-- If employee-level data exists: rank employees by void $ amount, flag anyone with void % > 2x the team average
+-- If day/time data exists: flag any day or shift with disproportionate voids
++- Before any ranking, separate corrections made before an item was sent to the kitchen from voids of items that were already sent. A blank "sent to kitchen" timestamp marks a pre-send correction. Pre-send corrections are a workflow and training signal, not lost sales, and are reported as their own rate. Only post-send voids count toward the void rate and any loss figure. If the data does not let you tell the two apart, report the combined figure as INSUFFICIENT_DATA for integrity purposes and stop there.
++- If employee-level data exists: rank by post-send void $ only, and flag an identifier only when it exceeds 2x the team average AND the pattern survives the pre-send split. A high raw count that is mostly pre-send corrections is a training pattern, not a flag. Never name or accuse an individual. Describe the pattern and recommend a process review, never an investigation of a person.
++- If day/time data exists: flag any day or shift with disproportionate post-send voids
+ 
+ **For Tier 1 only (minimal data):**
+ - State clearly: "Limited to Tier 1 analysis. Only annual/basic numbers available."

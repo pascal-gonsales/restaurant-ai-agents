@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-05-17,17:50:47,Server 3,ORD_0517_01,Dessert Plate,1,9.18,Kitchen issue,17:46:47,17:50:47,
+2025-05-17,21:38:43,Server 5,ORD_0517_02,House Salad,1,27.57,Order error,21:22:43,21:38:43,MGR_02
+2025-05-17,22:19:43,Server 5,ORD_0517_03,Soup of the Day,1,31.17,Guest request,22:10:43,22:19:43,MGR_01
+2025-05-17,17:47:13,Server 2,ORD_0517_04,Beef Bowl,1,8.37,Guest request,17:42:13,17:47:13,MGR_03

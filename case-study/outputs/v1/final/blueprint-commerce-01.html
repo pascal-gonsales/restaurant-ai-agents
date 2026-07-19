@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Year Blueprint - Commerce_01</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a1f24; --muted:#5b6570; --line:#e3e7eb;
+    --good:#137a4b; --warn:#9a6b00; --crit:#b02a2a;
+    --good-bg:#e7f4ec; --warn-bg:#fbf3df; --crit-bg:#f8e7e7;
+    --accent:#123a5e; --accent-ink:#ffffff; --chip:#eef1f4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1418; --card:#161d23; --ink:#e8edf1; --muted:#9aa6b1; --line:#28323b;
+      --good:#5fce9b; --warn:#e2b24d; --crit:#f08a8a;
+      --good-bg:#12241b; --warn-bg:#2a2413; --crit-bg:#2a1616;
+      --accent:#1d4f7d; --accent-ink:#ffffff; --chip:#1e262d;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px 64px}
+  .banner{background:var(--crit);color:#fff;text-align:center;font-weight:700;letter-spacing:.04em;padding:8px 12px;font-size:13px}
+  header.hero{padding:26px 0 10px}
+  header.hero h1{margin:0 0 4px;font-size:26px}
+  header.hero .sub{color:var(--muted);font-size:14px}
+  .tier{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12.5px;color:var(--muted)}
+  nav.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5;border-bottom:1px solid var(--line)}
+  .tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}
+  .tab.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .tab-content{display:none;padding-top:18px}
+  .tab-content.active{display:block}
+  h2{font-size:20px;margin:26px 0 8px;border-bottom:2px solid var(--line);padding-bottom:6px}
+  h3{font-size:16px;margin:20px 0 6px}
+  p{margin:8px 0}
+  .good{color:var(--good);font-weight:600}
+  .warn{color:var(--warn);font-weight:600}
+  .crit{color:var(--crit);font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .action-card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .action-rank{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;border-radius:6px;padding:2px 9px;font-size:12.5px;margin-bottom:6px}
+  .action-title{font-size:17px;font-weight:700;margin:2px 0 6px}
+  .action-impact{font-size:15px;font-weight:700;color:var(--crit);margin:6px 0}
+  .action-why{color:var(--muted);font-size:14.5px}
+  .conf{display:inline-block;border-radius:6px;padding:1px 9px;font-size:12.5px;font-weight:700;color:#fff}
+  .conf-2{background:#b06a1f}.conf-3{background:#8a7d17}.conf-4{background:#2f7d4f}.conf-5{background:#137a4b}
+  .info-box{background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:14.5px}
+  .info-box.amber{background:var(--warn-bg);border-color:var(--warn)}
+  .info-box.red{background:var(--crit-bg);border-color:var(--crit)}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  .scroll{overflow-x:auto}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .day-grid{display:grid;grid-template-columns:54px 1fr 90px 90px 70px;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:12px 0}
+  .day-grid .h{background:var(--chip);font-size:11.5px;text-transform:uppercase;color:var(--muted);padding:8px 10px;font-weight:700}
+  .day-grid .c{padding:9px 10px;border-top:1px solid var(--line)}
+  .day-grid .r{text-align:right;font-variant-numeric:tabular-nums}
+  .dq{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+  ul{margin:8px 0 8px 2px;padding-left:20px}
+  li{margin:5px 0}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:26px;border-top:1px solid var(--line);padding-top:12px}
+  @media (max-width:640px){
+    .day-grid{grid-template-columns:50px 1fr 70px}
+    .day-grid .hide-m,.day-grid .c.hide-m{display:none}
+    header.hero h1{font-size:22px}
+  }
+</style>
+</head>
+<body>
+<div class="banner">FICTIONAL CASE STUDY. SYNTHETIC DATA ONLY.</div>
+<div class="banner" style="background:#7a1f1f">REVIEW STATUS: unreviewed agent draft. See case-study/CORRECTIONS.md for the substantive errors found in review. Do not quote a figure from this draft alone.</div>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Next Year Blueprint - Commerce_01</h1>
+    <div class="sub">Prepared by Performance Audit &middot; 2026-07-17 &middot; Version 1 &middot; Currency CAD</div>
+    <div class="tier">
+      <span class="chip">Financial data tier: 4 (full)</span>
+      <span class="chip">Owner context: 0 of 15 answered</span>
+      <span class="chip">Foot traffic: no data</span>
+      <span class="chip">Confidence ceiling: 4</span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="quick">Quick View</button>
+    <button class="tab" data-tab="schedule">Schedule</button>
+    <button class="tab" data-tab="market">Market</button>
+    <button class="tab" data-tab="full">Full Analysis</button>
+  </nav>
+
+  <!-- QUICK VIEW -->
+  <section class="tab-content active" id="quick">
+    <div class="info-box red">
+      <strong>Read before acting on any report:</strong> the file <code>Q2 CORRECTED.csv</code> is wrong. It overstates Q2 net by
+      <span class="crit">$10,679.57 (+2.00%)</span> and would push FY net to $2,006,370.62. Use <code>Q2 (2).csv</code>
+      ($533,978.45), confirmed to the cent on 91/91 days by both the daily POS exports and the annual report. Both instincts
+      (newest file, "CORRECTED" filename) point at the wrong one.
+    </div>
+
+    <div class="action-card">
+      <span class="action-rank">Priority 1</span>
+      <div class="action-title">Restate the labor KPI on a burdened basis</div>
+      <div class="action-impact">$117,325.62 gap to target &middot; <span class="conf conf-4">Confidence 4</span></div>
+      <div class="action-why">The dashboard reads 30.41% (bare wages). With the 18% config burden applied, labor is 35.88% of net,
+      5.88 points over the 30% target, and 365 of 365 days breach it. This is a gap to a target, not recovered cash. The scheduling
+      lever is nearly exhausted (the best day-mix fix is worth only $2,401.72), so the fix lives in rate, hours, or the frozen $20 price.</div>
+    </div>
+
+    <div class="action-card">
+      <span class="action-rank">Priority 2</span>
+      <div class="action-title">Install approval controls on voids and the DSC_02 discount</div>
+      <div class="action-impact">$50,609.70 no-approval exposure &middot; <span class="conf conf-4">Confidence 4</span></div>
+      <div class="action-why">$39,925.43 flowed through a discount that needs no approval by design, plus $10,684.27 of voids with no
+      approval reference. This sizes a control gap, not a proven loss. No individual is an outlier (spread 1.12x against a 2x flag),
+      which points to a missing system control, not a person. Require a manager code on voids and approval on DSC_02.</div>
+    </div>
+
+    <div class="action-card">
+      <span class="action-rank">Priority 3</span>
+      <div class="action-title">Find out what drove May 5-18</div>
+      <div class="action-impact">$30,754.11 proven, cause unknown &middot; <span class="conf conf-2">Confidence 2</span></div>
+      <div class="action-why">A 14-day window added $30,754.11 of net on 1,533 covers at an unchanged $20.02 check and unchanged
+      labor ratio, then stopped dead. Not discounting, not pricing, not seasonality. It proves the venue absorbs about 38% more
+      volume without labor degrading. The cause is not in the data provided. Ask the owner and check any promo or event record.</div>
+    </div>
+
+    <div class="info-box amber">
+      <strong>Owner constraints honored:</strong> no fifty-page report, and no individual staff member is named anywhere in this
+      Blueprint. The void analysis is framed at the process level because the data itself shows no employee outlier.
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="tab-content" id="schedule">
+    <h2>Schedule</h2>
+    <div class="info-box amber">
+      <strong>No season split is offered.</strong> Summer / Shoulder / Winter differentiation cannot be built: the year is flat
+      (H1 $998,771.89 vs H2 $996,919.16, -0.19%) apart from one unexplained 14-day May window, and the owner supplied no seasonality
+      input. A single day-of-week view based on FY2025 actuals is shown instead.
+    </div>
+
+    <h3>Day-of-week actuals (FY2025, burdened at 18%)</h3>
+    <div class="day-grid" role="table" aria-label="Day of week schedule">
+      <div class="h">Day</div><div class="h hide-m">Avg hrs/day</div><div class="h r">Avg net/day</div><div class="h r hide-m">Wage (base)</div><div class="h r">Labor %</div>
+
+      <div class="c">Mon</div><div class="c hide-m">68.0</div><div class="c r">$4,503</div><div class="c r hide-m">$70,180</div><div class="c r warn">35.37%</div>
+      <div class="c">Tue</div><div class="c hide-m">71.3</div><div class="c r">$4,730</div><div class="c r hide-m">$73,650</div><div class="c r warn">35.33%</div>
+      <div class="c">Wed</div><div class="c hide-m">78.0</div><div class="c r">$5,178</div><div class="c r hide-m">$82,106</div><div class="c r warn">35.30%</div>
+      <div class="c">Thu</div><div class="c hide-m">86.1</div><div class="c r">$5,696</div><div class="c r hide-m">$88,828</div><div class="c r warn">35.39%</div>
+      <div class="c">Fri</div><div class="c hide-m">104.7</div><div class="c r">$6,919</div><div class="c r hide-m">$111,326</div><div class="c r crit">36.51%</div>
+      <div class="c">Sat</div><div class="c hide-m">109.1</div><div class="c r">$7,236</div><div class="c r hide-m">$116,032</div><div class="c r crit">36.39%</div>
+      <div class="c">Sun</div><div class="c hide-m">60.8</div><div class="c r">$4,017</div><div class="c r hide-m">$64,685</div><div class="c r crit">36.54%</div>
+    </div>
+    <p class="action-why">Loaded basis: base wage $606,807.57 &times; 1.18 (config <code>payroll_burden_pct</code> = 18) = $716,032.93 burdened.
+    SPLH sits in a $63.91 to $68.85 band across all 365 days, so hours already track sales tightly and no day is loose.</p>
+
+    <h3>Operating days</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Day</th><th>Recommendation</th><th class="num">Avg net/day</th><th class="num">Labor %</th><th>Confidence</th></tr></thead>
+      <tbody>
+        <tr><td>Monday</td><td>Keep open</td><td class="num">$4,503</td><td class="num">35.37%</td><td><span class="conf conf-2">2</span></td></tr>
+        <tr><td>Tuesday</td><td>Keep open</td><td class="num">$4,730</td><td class="num">35.33%</td><td><span class="conf conf-2">2</span></td></tr>
+        <tr><td>Wednesday</td><td>Keep open</td><td class="num">$5,178</td><td class="num">35.30%</td><td><span class="conf conf-2">2</span></td></tr>
+        <tr><td>Thursday</td><td>Keep open</td><td class="num">$5,696</td><td class="num">35.39%</td><td><span class="conf conf-3">3</span></td></tr>
+        <tr><td>Friday</td><td>Keep open</td><td class="num">$6,919</td><td class="num">36.51%</td><td><span class="conf conf-3">3</span></td></tr>
+        <tr><td>Saturday</td><td>Keep open</td><td class="num">$7,236</td><td class="num">36.39%</td><td><span class="conf conf-3">3</span></td></tr>
+        <tr><td>Sunday</td><td>Keep open</td><td class="num">$4,017</td><td class="num">36.54%</td><td><span class="conf conf-2">2</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="info-box">
+      <strong>Why no day is closed (Rule 8).</strong> Sunday is the weakest day and the obvious candidate. But closing it would lose
+      $208,901/year of revenue against an unknown variable cost (no COGS provided) and only about $2,401.72 of avoidable labor. There
+      is no evidence Sunday's contribution is negative, so a closure is not supported by the data.
+    </div>
+
+    <h3>Recommended hours</h3>
+    <p>Known hours: 11:00 to 23:00, seven days a week, from the launch brief only (not owner-confirmed, not from POS). Confidence 2.</p>
+    <p><strong>No change to hours is recommended, because no data supports one.</strong> Last seating, kitchen close, staff start, and
+    bar close require data which was not available for this audit. There is no hourly sales data, so daypart and peak-hour analysis
+    cannot be performed.</p>
+
+    <div class="info-box red">
+      <strong>Labor model checklist cannot be completed.</strong> Setup/cleanup time, afternoon-bridge staffing, owner-operator
+      patterns, and the dollar value of each owner day all require an employee-level export (headcount and shifts) and owner answers.
+      The labor file is a daily BOH/FOH aggregate with no headcount, and the owner answered 0 of 15 questions. This is stated, not
+      filled with generic content. <code>min_foh_per_day = 2</code> is unverifiable (unit ambiguous; minimum FOH hours on any day is 30.89).
+    </div>
+  </section>
+
+  <!-- MARKET -->
+  <section class="tab-content" id="market">
+    <h2>Market and Foot Traffic</h2>
+    <div class="info-box red">
+      <strong>No foot traffic data exists for Commerce_01.</strong> This is a complete absence, not a weak signal. No traffic
+      pattern, gap analysis, or competitor comparison can be produced.
+    </div>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Captured request</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Commerce_01 foot traffic (2025, daily)</td><td class="crit">HTTP 403 subscription_required, empty series</td></tr>
+        <tr><td>Commerce_02 foot traffic</td><td class="crit">HTTP 403 subscription_required (sibling location, not a competitor)</td></tr>
+        <tr><td>Commerce_03 foot traffic</td><td class="crit">HTTP 403 subscription_required (sibling location, not a competitor)</td></tr>
+        <tr><td>Commerce_01 reservations</td><td class="crit">HTTP 404 not_configured, empty series</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">Live API credits used: 0. The cause is structural, not transient: no traffic subscription is active, which
+    matches the owner's own statement that no traffic feed was ever contracted and reservations are taken by phone and not logged.
+    No venue name, address, or city exists in any permitted input, so no competitor query could be formed even in principle.</p>
+    <div class="info-box amber">
+      <strong>To make this analysis possible, two owner decisions are needed:</strong> (1) an active traffic subscription for the
+      location, and (2) an explicit, verified venue name and city. Both are owner decisions, not gaps this audit can close.
+    </div>
+  </section>
+
+  <!-- FULL ANALYSIS -->
+  <section class="tab-content" id="full">
+    <h2>Full Analysis</h2>
+
+    <h3>FY2025 headline</h3>
+    <div class="scroll">
+    <table>
+      <tbody>
+        <tr><td>Gross sales</td><td class="num">$2,100,758.00</td></tr>
+        <tr><td>Discounts (5.00% of gross)</td><td class="num">$105,066.95</td></tr>
+        <tr><td>Voids as reported (1.00% of gross)</td><td class="num">$21,024.89</td></tr>
+        <tr><td><strong>Net sales</strong></td><td class="num"><strong>$1,995,691.05</strong></td></tr>
+        <tr><td>Transactions</td><td class="num">58,698</td></tr>
+        <tr><td>Covers</td><td class="num">99,782</td></tr>
+        <tr><td>Average check per cover</td><td class="num">$20.00</td></tr>
+        <tr><td>Average per transaction</td><td class="num">$34.00</td></tr>
+        <tr><td>Average net per day</td><td class="num">$5,467.65</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">Net convention is POS-reported <code>gross - discounts</code>, which holds on 365/365 days across both POS
+    systems and matches the annual report and product files. Tax is a clean 10.0% of net and sits outside gross. Cover counts carry
+    the owner's caveat ("approximately right, I would not bet the business on them"); net dollars reconcile four ways and are solid,
+    but anything derived per cover inherits that caveat.</p>
+
+    <h3>Revenue by day of week</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Day</th><th class="num">Net</th><th class="num">Avg/day</th><th class="num">Covers</th><th class="num">Hours</th><th class="num">Wage (base)</th><th class="num">SPLH</th></tr></thead>
+      <tbody>
+        <tr><td>Saturday</td><td class="num">$376,254</td><td class="num">$7,236</td><td class="num">18,814</td><td class="num">5,676</td><td class="num">$116,032</td><td class="num">$66.29</td></tr>
+        <tr><td>Friday</td><td class="num">$359,795</td><td class="num">$6,919</td><td class="num">17,990</td><td class="num">5,445</td><td class="num">$111,326</td><td class="num">$66.07</td></tr>
+        <tr><td>Thursday</td><td class="num">$296,191</td><td class="num">$5,696</td><td class="num">14,802</td><td class="num">4,475</td><td class="num">$88,828</td><td class="num">$66.19</td></tr>
+        <tr><td>Wednesday</td><td class="num">$274,445</td><td class="num">$5,178</td><td class="num">13,718</td><td class="num">4,136</td><td class="num">$82,106</td><td class="num">$66.35</td></tr>
+        <tr><td>Tuesday</td><td class="num">$245,967</td><td class="num">$4,730</td><td class="num">12,303</td><td class="num">3,710</td><td class="num">$73,650</td><td class="num">$66.31</td></tr>
+        <tr><td>Monday</td><td class="num">$234,138</td><td class="num">$4,503</td><td class="num">11,709</td><td class="num">3,535</td><td class="num">$70,180</td><td class="num">$66.23</td></tr>
+        <tr><td>Sunday</td><td class="num">$208,901</td><td class="num">$4,017</td><td class="num">10,446</td><td class="num">3,164</td><td class="num">$64,685</td><td class="num">$66.02</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">Friday plus Saturday is $736,049, or 36.9% of the year in 2 of 7 days. Sunday is 55.5% of Saturday's volume.</p>
+
+    <h3>Monthly (FY2025 only, no year-over-year possible)</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Month</th><th class="num">Net</th><th class="num">MoM %</th><th class="num">Covers</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Jan</td><td class="num">$157,005</td><td class="num">--</td><td class="num">7,852</td><td></td></tr>
+        <tr><td>Feb</td><td class="num">$144,262</td><td class="num">-8.1%</td><td class="num">7,215</td><td>Lowest absolute (short month)</td></tr>
+        <tr><td>Mar</td><td class="num">$163,527</td><td class="num">+13.4%</td><td class="num">8,174</td><td></td></tr>
+        <tr><td>Apr</td><td class="num">$160,100</td><td class="num">-2.1%</td><td class="num">8,005</td><td></td></tr>
+        <tr><td><strong>May</strong></td><td class="num"><strong>$204,089</strong></td><td class="num good">+27.5%</td><td class="num">10,199</td><td>Best month (unexplained May 5-18 window)</td></tr>
+        <tr><td>Jun</td><td class="num">$169,790</td><td class="num">-16.8%</td><td class="num">8,487</td><td></td></tr>
+        <tr><td>Jul</td><td class="num">$177,484</td><td class="num">+4.5%</td><td class="num">8,874</td><td>POS system changes</td></tr>
+        <tr><td>Aug</td><td class="num">$180,793</td><td class="num">+1.9%</td><td class="num">9,040</td><td></td></tr>
+        <tr><td>Sep</td><td class="num">$160,851</td><td class="num">-11.0%</td><td class="num">8,045</td><td></td></tr>
+        <tr><td>Oct</td><td class="num">$165,673</td><td class="num">+3.0%</td><td class="num">8,284</td><td></td></tr>
+        <tr><td>Nov</td><td class="num">$156,114</td><td class="num">-5.8%</td><td class="num">7,810</td><td></td></tr>
+        <tr><td>Dec</td><td class="num">$156,004</td><td class="num">-0.1%</td><td class="num">7,797</td><td>Weakest per-day ($5,032/day)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="info-box amber">
+      <strong>POS transition caveat.</strong> The two systems disagree by 3.89% (Jul 1) and 6.50% (Jul 2) on the only two days both
+      covered. H1 and H2 are measured with different rulers, so the -0.19% H2-vs-H1 result carries an unquantified systematic error.
+      Do not build a growth or decline narrative on it.
+    </div>
+
+    <h3>The May 5-18 window</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Metric</th><th class="num">May 5-18</th><th class="num">Rest of year</th></tr></thead>
+      <tbody>
+        <tr><td>Excess net vs baseline</td><td class="num good">+$30,754.11</td><td class="num">--</td></tr>
+        <tr><td>Excess covers</td><td class="num">+1,533</td><td class="num">--</td></tr>
+        <tr><td>Average check</td><td class="num">$20.02</td><td class="num">$20.00</td></tr>
+        <tr><td>Discount % of gross</td><td class="num">4.97%</td><td class="num">5.00%</td></tr>
+        <tr><td>Burdened labor %</td><td class="num">35.84%</td><td class="num">35.88%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">Sharp boundaries: May 4 was $66 below baseline, May 5 jumped $1,801 above, May 19 returned to normal. The
+    only four days in the year beyond 2.5 standard deviations all sit inside this window. Cause unknown; nothing in the provided
+    inputs (POS, labor, reports, config) carries marketing, event, or calendar context.</p>
+
+    <h3>Category and item mix</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Category</th><th class="num">Net</th><th class="num">% of net</th><th class="num">Units</th></tr></thead>
+      <tbody>
+        <tr><td>Mains</td><td class="num">$1,418,288.00</td><td class="num">71.1%</td><td class="num">73,315</td></tr>
+        <tr><td>Starters</td><td class="num">$268,639.64</td><td class="num">13.5%</td><td class="num">26,616</td></tr>
+        <tr><td>Desserts</td><td class="num">$183,942.78</td><td class="num">9.2%</td><td class="num">24,192</td></tr>
+        <tr><td>Beverages</td><td class="num">$124,820.63</td><td class="num">6.3%</td><td class="num">32,846</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">Top items: Grilled Chicken Plate $429,791.63 (21.5%), Beef Bowl $392,308.58 (19.7%), Pasta Special
+    $354,511.15 (17.8%). The entire beverage category is one SKU (soft drink), attach 32.9%, no alcohol SKU in the data. A 20-30%
+    beverage benchmark is an industry figure, not this venue's data, and is only meaningful if the venue is licensed and full
+    service, which the data cannot establish. Flagged as an owner question, not a finding.</p>
+
+    <h3>Labor</h3>
+    <div class="scroll">
+    <table>
+      <tbody>
+        <tr><td>Total hours (OT 857.08, 2.84%)</td><td class="num">30,140.52</td></tr>
+        <tr><td>Wage cost (base)</td><td class="num">$606,807.57</td></tr>
+        <tr><td>Burdened cost (x1.18)</td><td class="num">$716,032.93</td></tr>
+        <tr><td>Labor % of net, wage only</td><td class="num">30.41%</td></tr>
+        <tr><td>Labor % of net, burdened</td><td class="num crit">35.88%</td></tr>
+        <tr><td>Target</td><td class="num">30.00%</td></tr>
+        <tr><td>Gap to target</td><td class="num crit">$117,325.62</td></tr>
+        <tr><td>BOH (12,815.90 h, $21.30/hr)</td><td class="num">$272,952.04</td></tr>
+        <tr><td>FOH (17,324.62 h, $19.27/hr)</td><td class="num">$333,855.53</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">On the wage-only reading, 248/365 days exceed 30%. On the burdened reading, 365/365 do (range 34.02% to
+    37.75%). The un-burdened figure is why the miss has gone unnoticed. The gap is structural, not a scheduling error: SPLH stays in a
+    $5 band all year and the best day-mix fix is worth only $2,401.72 (2% of the gap).</p>
+
+    <h3>Integrity: voids and discounts</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Measure</th><th class="num">Value</th><th class="num">% of gross</th></tr></thead>
+      <tbody>
+        <tr><td>Void detail, all events (1,514)</td><td class="num">$28,803.41</td><td class="num crit">1.37%</td></tr>
+        <tr><td>Void detail, sent to kitchen (1,099)</td><td class="num">$21,024.89</td><td class="num">1.00%</td></tr>
+        <tr><td>Daily summary voids column</td><td class="num">$21,024.89</td><td class="num">1.00%</td></tr>
+        <tr><td>Void activity absent from every summary</td><td class="num crit">$7,778.52</td><td class="num">0.37%</td></tr>
+        <tr><td>Voids with no approval reference (574 events)</td><td class="num">$10,684.27</td><td class="num">--</td></tr>
+        <tr><td>Cooked then voided, unapproved (273 events)</td><td class="num">$5,109.04</td><td class="num">--</td></tr>
+        <tr><td>DSC_02 Set Menu, no approval by design (4,438 uses)</td><td class="num">$39,925.43</td><td class="num">1.9%</td></tr>
+        <tr><td>Total no-approval exposure</td><td class="num crit">$50,609.70</td><td class="num">2.5% of net</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="action-why">The summary counts a void only if the item reached the kitchen (confirmed 365/365 days). No employee is an
+    outlier: void value spans 0.95x to 1.06x of the team average, a 1.12x spread against a 2x flag. That uniformity is a process
+    signature, not a people signature, and the fix is a system control. Per the owner's instruction, no individual is named.</p>
+
+    <h3 id="dq">Data Quality Notes</h3>
+    <div class="dq">
+      <p><strong>Provided:</strong> POS_A and POS_B daily/products/voids/discounts for all 365 days; daily-aggregate labor (730 rows,
+      BOH/FOH); Q1-Q4 reports (Q2 in five variants) plus the group annual report; config. All files parsed cleanly.</p>
+      <p><strong>Missing:</strong> COGS / food purchases / P&amp;L (blocks food cost and prime cost, the biggest gap); owner
+      operational context (0 of 15 answered); employee-level labor (no headcount or shifts); hourly sales; foot traffic and
+      reservations; marketing / event / local calendar (blocks the May question); bank statements (no independent check on the POS
+      lineage); H2 tips.</p>
+      <p><strong>Skipped:</strong> food cost %, prime cost %, revenue by hour, year-over-year, foot traffic and competitor analysis,
+      full owner-driven scheduling. Each because the enabling data was not provided.</p>
+      <p><strong>Assumptions:</strong> Q2 (2).csv is authoritative (matches daily POS and annual report 91/91 to the cent); POS_B used
+      for the Jul 1-2 overlap (3.89% and 6.50% disagreement not reconciled); POS-reported net used (procedure formula would understate
+      net by roughly 11%); 18% burden per config; May baseline is the day-of-week median of the other eleven months.</p>
+      <p><strong>Limitations:</strong> the POS transition is not reconciled, so the flat trend is not trustworthy; no external
+      verification; the labor gap is a gap, not a saving; void dollars are menu value, not food cost; <code>min_foh_per_day</code> is
+      unverifiable; the May driver is unknown; the owner's belief that Commerce_01 carries the group and the other two are steady
+      cannot be verified, because only Commerce_01 was analysed; the data is unusually regular, consistent with its declared synthetic
+      classification.</p>
+      <p><strong>To improve (priority order):</strong> supplier invoices / monthly COGS; the May 5-18 driver; a FY2025 P&amp;L; owner
+      answers to the 15 questions; an employee-level labor export; POS migration notes; hourly sales; bank statements.</p>
+    </div>
+
+    <h3>What to track weekly</h3>
+    <ul>
+      <li>Burdened labor % (base wage &times; 1.18), never the wage-only figure. Target 30%.</li>
+      <li>Void rate on all events (1.37% true), not just kitchen-sent (1.00% summary). Report both.</li>
+      <li>Count and value of unapproved voids and discounts. Baseline: 574 unapproved void events; $39,925.43 no-approval discounts.</li>
+      <li>Daily covers versus the day-of-week baseline, to catch the next May-type window as it happens.</li>
+      <li>Average check. It has not moved off $20.00 in twelve months; watch it if any price test is run.</li>
+    </ul>
+
+    <h3>Questions for the owner</h3>
+    <p class="action-why">The owner answered 0 of 15 standard questions and invited follow-up. Priority items, tied to data gaps:</p>
+    <ul>
+      <li>What happened between May 5 and May 18, 2025? (Highest-value question in the audit.)</li>
+      <li>What is the exact POS cutover date, and which systems before and after? (Jul 1-2 seam is unreconciled.)</li>
+      <li>Has the menu price changed at all? The average check has been frozen at $20.00 all year.</li>
+      <li>Is the venue licensed and full service? (Determines whether the 6.3% beverage share is low.)</li>
+      <li>Actual hourly wage rates for FOH, cooks, and manager; and does <code>min_foh_per_day = 2</code> mean people or hours?</li>
+      <li>Does Commerce_01 actually carry the group, and are the other two locations genuinely flat?</li>
+      <li>Can you share supplier invoices / monthly COGS and a FY2025 P&amp;L?</li>
+      <li>Owner and staff structure: couple or solo, who opens and closes, full-time vs part-time, split shifts, the afternoon gap.</li>
+      <li>Seasonality, patio, lease restrictions; delivery platform share; what you tried last year that worked or flopped; planned changes.</li>
+    </ul>
+  </section>
+
+  <div class="foot">
+    FICTIONAL CASE STUDY. SYNTHETIC DATA ONLY. Every figure traces to the Agent 1 data-analysis claims. Confidence ceiling for this
+    audit is 4: a score of 5 requires POS, labor, and foot traffic to align, and foot traffic is entirely absent while owner context
+    is minimal. This is version 1.
+  </div>
+
+</div>
+<script>
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active');});
+      document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+      btn.classList.add('active');
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>

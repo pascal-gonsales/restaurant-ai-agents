@@ -1,0 +1,78 @@
+# Terms that must never appear anywhere under case-study/.
+# Matching is case-insensitive. Lines starting with # are comments.
+#
+# This committed file lists only GENERIC industry names and a path pattern. It does
+# NOT list the author's real business or client names: publishing those in a public
+# repo would itself be the leak this test exists to prevent. Those names live in an
+# uncommitted, gitignored file, tests/forbidden_terms.private.txt, which the test
+# loads if present (kept locally, run before every publish). The generated data and
+# the deliverables avoid the generic names too; they are permitted only in verbatim
+# copies of already-public prompts (runs/*/effective-prompt.txt) and in the
+# prompt-amendment diff.
+#
+# Note: the generic phrase "a citywide restaurant week" is REQUIRED by the fixture
+# and is deliberately not listed here. Only named, real events are.
+
+# --- Personal paths ---
+/Users/Pascal
+
+# --- Real point of sale vendors ---
+Toast
+Square
+Lightspeed
+Clover
+TouchBistro
+Veloce
+Maitre D
+Aloha
+Micros
+Oracle Hospitality
+Revel
+SpotOn
+Upserve
+Cake POS
+Poster POS
+Silverware
+
+# --- Real scheduling, labor and back-office tools ---
+7shifts
+Deputy
+HotSchedules
+Homebase
+Push Operations
+Sling
+Restaurant365
+MarginEdge
+Craftable
+Compeat
+QuickBooks
+Xero
+Notion
+Airtable
+
+# --- Real places ---
+Montreal
+Toronto
+Milton
+Ottawa
+Quebec
+Laval
+Longueuil
+Brossard
+Vancouver
+Calgary
+New York
+Chicago
+London
+Paris
+Bangkok
+
+# --- Real named events ---
+Restaurant Week NYC
+Dine Out
+Taste of
+MTL a Table
+Winterlude
+Osheaga
+Just for Laughs
+Grand Prix

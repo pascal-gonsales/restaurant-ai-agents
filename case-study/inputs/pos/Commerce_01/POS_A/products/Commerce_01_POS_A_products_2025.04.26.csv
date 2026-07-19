@@ -1,0 +1,9 @@
+Date,Product ID,Item Name,Category,Quantity Sold,Gross Revenue,Discounts,Net Revenue
+2025-04-26,SKU_001,House Salad,Starters,53,636.00,28.92,607.08
+2025-04-26,SKU_002,Soup of the Day,Starters,45,405.00,20.93,384.07
+2025-04-26,SKU_003,Grilled Chicken Plate,Mains,77,1694.00,78.29,1615.71
+2025-04-26,SKU_004,Pasta Special,Mains,66,1254.00,65.44,1188.56
+2025-04-26,SKU_005,Beef Bowl,Mains,58,1392.00,62.00,1330.00
+2025-04-26,SKU_006,Veggie Wrap,Mains,62,992.00,50.52,941.48
+2025-04-26,SKU_007,Dessert Plate,Desserts,86,688.00,34.24,653.76
+2025-04-26,SKU_008,Soft Drink,Beverages,118,472.00,23.89,448.11

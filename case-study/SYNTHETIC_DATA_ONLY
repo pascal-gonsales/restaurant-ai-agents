@@ -1,0 +1,18 @@
+FICTIONAL CASE STUDY. SYNTHETIC DATA ONLY.
+
+Every file under this directory is generated from a fixed seed by
+generate_fixture.py. Nothing here describes a real business, a real person, a
+real location, a real point of sale vendor, a real scheduling tool or a real
+event.
+
+The identifiers are placeholders:
+
+- Commerce_01, Commerce_02, Commerce_03 are fictional locations.
+- POS_A and POS_B are fictional point of sale systems.
+- Scheduling_Tool is a fictional labor source.
+- Server 1 through Server 5 are synthetic staff references. No person, name,
+  gender or personal detail stands behind any of them, and none may ever be
+  added.
+
+The presence of this sentinel file is asserted by the test suite. Do not
+remove it, and do not place real data beside it.

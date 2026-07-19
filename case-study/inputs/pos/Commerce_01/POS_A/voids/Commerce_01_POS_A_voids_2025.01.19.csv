@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-01-19,19:00:22,Server 3,ORD_0119_01,House Salad,1,29.45,Item changed,18:58:22,19:00:22,MGR_03
+2025-01-19,22:21:13,Server 3,ORD_0119_02,Veggie Wrap,1,29.05,Price adjust,22:14:13,22:21:13,MGR_02
+2025-01-19,17:23:49,Server 3,ORD_0119_03,Dessert Plate,1,31.12,Price adjust,17:16:49,17:23:49,MGR_03
+2025-01-19,18:09:36,Server 5,ORD_0119_04,Pasta Special,1,9.27,Order error,18:06:36,18:09:36,MGR_01

@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-05-05,19:33:48,Server 2,ORD_0505_01,Soup of the Day,1,18.28,Guest request,,19:33:48,
+2025-05-05,16:06:46,Server 5,ORD_0505_02,Pasta Special,1,31.50,Order error,,16:06:46,
+2025-05-05,13:58:09,Server 5,ORD_0505_03,Beef Bowl,1,8.00,Guest request,13:43:09,13:58:09,
+2025-05-05,14:39:05,Server 2,ORD_0505_04,Pasta Special,1,10.07,Item changed,14:15:05,14:39:05,

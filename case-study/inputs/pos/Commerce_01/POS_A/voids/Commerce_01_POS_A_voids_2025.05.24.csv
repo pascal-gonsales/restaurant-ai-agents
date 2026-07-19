@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-05-24,18:22:24,Server 4,ORD_0524_01,Beef Bowl,1,29.46,Price adjust,,18:22:24,
+2025-05-24,21:03:28,Server 4,ORD_0524_02,Beef Bowl,1,31.61,Item changed,20:41:28,21:03:28,MGR_03
+2025-05-24,13:29:59,Server 1,ORD_0524_03,Soup of the Day,1,22.40,Kitchen issue,13:18:59,13:29:59,
+2025-05-24,21:31:20,Server 5,ORD_0524_04,Beef Bowl,1,30.07,Item changed,21:29:20,21:31:20,MGR_03

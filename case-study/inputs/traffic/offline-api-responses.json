@@ -1,0 +1,74 @@
+{
+  "banner": "FICTIONAL CASE STUDY. SYNTHETIC DATA ONLY.",
+  "collector": "offline-capture",
+  "captured_for_year": 2025,
+  "note": "Synthetic offline capture. No usable traffic data is present.",
+  "requests": [
+    {
+      "endpoint": "/v1/locations/Commerce_01/foot-traffic",
+      "params": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "granularity": "daily"
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "error": "subscription_required",
+          "message": "No traffic subscription is active for this location.",
+          "series": []
+        }
+      }
+    },
+    {
+      "endpoint": "/v1/locations/Commerce_02/foot-traffic",
+      "params": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "granularity": "daily"
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "error": "subscription_required",
+          "message": "No traffic subscription is active for this location.",
+          "series": []
+        }
+      }
+    },
+    {
+      "endpoint": "/v1/locations/Commerce_03/foot-traffic",
+      "params": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "granularity": "daily"
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "error": "subscription_required",
+          "message": "No traffic subscription is active for this location.",
+          "series": []
+        }
+      }
+    },
+    {
+      "endpoint": "/v1/locations/Commerce_01/reservations",
+      "params": {
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      "response": {
+        "status": 404,
+        "body": {
+          "error": "not_configured",
+          "message": "Reservations are not logged in an exportable system.",
+          "series": []
+        }
+      }
+    }
+  ],
+  "usable_series_count": 0,
+  "usable_series": [],
+  "summary": "Every request returned an error. No traffic series is available for any location in 2025."
+}

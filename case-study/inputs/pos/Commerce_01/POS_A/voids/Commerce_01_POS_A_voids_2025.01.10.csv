@@ -1,0 +1,5 @@
+Date,Time,Employee ID,Check ID,Item,Quantity,Amount,Reason,Sent to Kitchen At,Voided At,Approval ID
+2025-01-10,13:31:14,Server 2,ORD_0110_01,Dessert Plate,1,22.18,Order error,,13:31:14,
+2025-01-10,13:44:12,Server 4,ORD_0110_02,Dessert Plate,1,26.65,Order error,,13:44:12,
+2025-01-10,16:22:20,Server 1,ORD_0110_03,Soft Drink,1,31.04,Item changed,16:02:20,16:22:20,
+2025-01-10,12:50:47,Server 4,ORD_0110_04,Soft Drink,1,15.96,Item changed,12:36:47,12:50:47,

@@ -1,0 +1,2 @@
+business_date,location_id,sales_total,discount_total,void_total,tax_total,net_total,receipt_count,guest_count,currency,tz_offset_minutes
+2025-09-16,Commerce_03,5511.00,293.02,105.41,521.80,5217.98,153,260,CAD,-300

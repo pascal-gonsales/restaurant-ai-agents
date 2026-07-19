@@ -1,0 +1,3575 @@
+[
+  {
+    "claim_id": "REVIEW_NOTICE",
+    "value": null,
+    "unit": "note",
+    "formula": "",
+    "source_paths": [
+      "case-study/CORRECTIONS.md"
+    ],
+    "source_columns": [],
+    "source_rows": "Unreviewed agent draft. An operator review corrected four items: the +2.99% H1/H2 trend (unequal-period artifact, 181 vs 184 days; per day about +1.31%, below the POS seam, so the ordinary trend is indeterminate, not a reversal); the event dollar figure (an estimate versus one baseline, not proven and not full contribution margin); the Tier 4 label (actually Tier 3, no COGS); and post-send void 'loss' language (post-send voided menu value, not a loss). See case-study/CORRECTIONS.md."
+  },
+  {
+    "claim_id": "inv.posA.file_count",
+    "value": 183,
+    "unit": "files",
+    "formula": "count(files in pos/Commerce_01/POS_A/daily/)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [],
+    "source_rows": "all files"
+  },
+  {
+    "claim_id": "inv.posA.date_first",
+    "value": "2025-01-01",
+    "unit": "date",
+    "formula": "min(Business Date) across POS_A daily files",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.01.01.csv"
+    ],
+    "source_columns": [
+      "Business Date"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "inv.posA.date_last",
+    "value": "2025-07-02",
+    "unit": "date",
+    "formula": "max(Business Date) across POS_A daily files",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "Business Date"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "inv.posB.file_count",
+    "value": 184,
+    "unit": "files",
+    "formula": "count(files in pos/Commerce_01/POS_B/daily/)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [],
+    "source_rows": "all files"
+  },
+  {
+    "claim_id": "inv.posB.date_first",
+    "value": "2025-07-01",
+    "unit": "date",
+    "formula": "min(business_date) across POS_B daily files",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "business_date"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "inv.posB.date_last",
+    "value": "2025-12-31",
+    "unit": "date",
+    "formula": "max(business_date) across POS_B daily files",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.12.31.csv"
+    ],
+    "source_columns": [
+      "business_date"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "inv.overlap.days",
+    "value": 2,
+    "unit": "days",
+    "formula": "count(set(POS_A dates) intersect set(POS_B dates))",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Business Date",
+      "business_date"
+    ],
+    "source_rows": "2025-07-01, 2025-07-02"
+  },
+  {
+    "claim_id": "inv.canonical.days",
+    "value": 365,
+    "unit": "days",
+    "formula": "count(POS_A dates <= 2025-06-30) + count(POS_B dates) = 181 + 184",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Business Date",
+      "business_date"
+    ],
+    "source_rows": "all 365 canonical day-rows"
+  },
+  {
+    "claim_id": "inv.labor.rows",
+    "value": 730,
+    "unit": "rows",
+    "formula": "count(rows where location_id='Commerce_01') across 12 labor files = 365 days x 2 roles",
+    "source_paths": [
+      "inputs/labor/Scheduling_Tool_labor_2025.01.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.02.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.03.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.04.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.05.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.06.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.07.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.08.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.09.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.10.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.11.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.12.csv"
+    ],
+    "source_columns": [
+      "location_id"
+    ],
+    "source_rows": "rows where location_id='Commerce_01'"
+  },
+  {
+    "claim_id": "inv.annual.rows_c01",
+    "value": 365,
+    "unit": "rows",
+    "formula": "count(rows where commerce_id='Commerce_01')",
+    "source_paths": [
+      "inputs/reports/Demo_Group_Annual_Sales_Report_2025.csv"
+    ],
+    "source_columns": [
+      "commerce_id",
+      "business_date"
+    ],
+    "source_rows": "rows where commerce_id='Commerce_01'"
+  },
+  {
+    "claim_id": "inv.voids.posA.events",
+    "value": 724,
+    "unit": "events",
+    "formula": "count(void rows in POS_A voids files where Date <= 2025-06-30)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/"
+    ],
+    "source_columns": [
+      "Date"
+    ],
+    "source_rows": "all rows with Date <= 2025-06-30"
+  },
+  {
+    "claim_id": "inv.voids.posB.events",
+    "value": 790,
+    "unit": "events",
+    "formula": "count(void rows in POS_B voids files)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "business_date"
+    ],
+    "source_rows": "all rows"
+  },
+  {
+    "claim_id": "recon.annual_vs_daily.mismatches",
+    "value": 0,
+    "unit": "days",
+    "formula": "count(days where abs(daily.net - annual.net_sales) > 0.005 or abs(daily.gross - annual.gross_sales) > 0.005) over 365 canonical days",
+    "source_paths": [
+      "inputs/reports/Demo_Group_Annual_Sales_Report_2025.csv",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_sales",
+      "gross_sales",
+      "Net Sales",
+      "Gross Sales",
+      "net_total",
+      "sales_total"
+    ],
+    "source_rows": "all 365 canonical days"
+  },
+  {
+    "claim_id": "recon.discount_detail_vs_daily.match_days",
+    "value": 365,
+    "unit": "days",
+    "formula": "count(days where abs(sum(discount detail) - daily.discounts) < 0.02) / 365",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value",
+      "Discounts",
+      "discount_total"
+    ],
+    "source_rows": "all 365 canonical days"
+  },
+  {
+    "claim_id": "recon.products_net_total",
+    "value": 1995691.05,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue) over POS_A products (to 2025-06-30) + sum(net_sales) over POS_B products; equals daily net total exactly",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows for canonical days"
+  },
+  {
+    "claim_id": "recon.net_convention.days_fitting_gross_minus_disc",
+    "value": 365,
+    "unit": "days",
+    "formula": "count(days where abs(net - (gross - discounts)) < 0.005) / 365",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Gross Sales",
+      "Discounts",
+      "Net Sales",
+      "sales_total",
+      "discount_total",
+      "net_total"
+    ],
+    "source_rows": "all 365 canonical days"
+  },
+  {
+    "claim_id": "recon.tax_pct_of_net",
+    "value": 10.0,
+    "unit": "percent",
+    "formula": "sum(Tax, tax_total) / sum(net) x 100 = 199569.30 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Tax",
+      "tax_total",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "all 365 canonical days"
+  },
+  {
+    "claim_id": "q2.variant1.net_total",
+    "value": 562030.0,
+    "unit": "CAD",
+    "formula": "sum(net_sales) over 91 rows",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 (1).csv"
+    ],
+    "source_columns": [
+      "net_sales"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.variant1.formula_fit",
+    "value": 91,
+    "unit": "days_of_91",
+    "formula": "count(rows where abs(net_sales - gross_sales) < 0.005); revision rev-3a07, generated_at 2025-07-07T16:02:00Z",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 (1).csv"
+    ],
+    "source_columns": [
+      "net_sales",
+      "gross_sales",
+      "revision_id",
+      "generated_at"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.variant2.net_total",
+    "value": 533978.45,
+    "unit": "CAD",
+    "formula": "sum(net_sales) over 91 rows",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 (2).csv"
+    ],
+    "source_columns": [
+      "net_sales"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.variant2.formula_fit",
+    "value": 91,
+    "unit": "days_of_91",
+    "formula": "count(rows where abs(net_sales - (gross_sales - discounts)) < 0.005); revision rev-b45c, generated_at 2025-07-06T11:48:00Z",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 (2).csv"
+    ],
+    "source_columns": [
+      "net_sales",
+      "gross_sales",
+      "discounts",
+      "revision_id",
+      "generated_at"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.variant2.match_daily",
+    "value": 91,
+    "unit": "days_of_91",
+    "formula": "count(rows where abs(report.net_sales - dailyPOS_A.Net Sales) < 0.005)",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 (2).csv",
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "net_sales",
+      "Net Sales"
+    ],
+    "source_rows": "2025-04-01 to 2025-06-30"
+  },
+  {
+    "claim_id": "q2.variant2.match_annual",
+    "value": 91,
+    "unit": "days_of_91",
+    "formula": "count(rows where abs(report.net_sales - annual.net_sales) < 0.005)",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 (2).csv",
+      "inputs/reports/Demo_Group_Annual_Sales_Report_2025.csv"
+    ],
+    "source_columns": [
+      "net_sales"
+    ],
+    "source_rows": "2025-04-01 to 2025-06-30, commerce_id='Commerce_01'"
+  },
+  {
+    "claim_id": "q2.corrected.net_total",
+    "value": 544658.02,
+    "unit": "CAD",
+    "formula": "sum(net_sales) over 91 rows",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 CORRECTED.csv"
+    ],
+    "source_columns": [
+      "net_sales"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.corrected.formula_fit",
+    "value": 91,
+    "unit": "days_of_91",
+    "formula": "count(rows where abs(net_sales - (gross_sales - discounts) * 1.02) < 0.02); revision rev-19de, generated_at 2025-07-08T08:30:00Z (newest of the five)",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 CORRECTED.csv"
+    ],
+    "source_columns": [
+      "net_sales",
+      "gross_sales",
+      "discounts",
+      "revision_id",
+      "generated_at"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.plain.net_total",
+    "value": 539485.67,
+    "unit": "CAD",
+    "formula": "sum(net_sales) over 91 rows",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2.csv"
+    ],
+    "source_columns": [
+      "net_sales"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.plain.formula_fit",
+    "value": 91,
+    "unit": "days_of_91",
+    "formula": "count(rows where abs(net_sales - (gross_sales - discounts + voids)) < 0.005); revision rev-8f21, generated_at 2025-07-05T09:14:00Z",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2.csv"
+    ],
+    "source_columns": [
+      "net_sales",
+      "gross_sales",
+      "discounts",
+      "voids",
+      "revision_id",
+      "generated_at"
+    ],
+    "source_rows": "all 91 data rows"
+  },
+  {
+    "claim_id": "q2.true_net_from_daily",
+    "value": 533978.45,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over POS_A daily files where 2025-04-01 <= Business Date <= 2025-06-30 (91 days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "Business Date"
+    ],
+    "source_rows": "91 daily files 2025.04.01 to 2025.06.30"
+  },
+  {
+    "claim_id": "q2.corrected.overstatement_abs",
+    "value": 10679.57,
+    "unit": "CAD",
+    "formula": "544658.02 - 533978.45",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 CORRECTED.csv",
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "net_sales",
+      "Net Sales"
+    ],
+    "source_rows": "2025-04-01 to 2025-06-30"
+  },
+  {
+    "claim_id": "q2.corrected.overstatement_pct",
+    "value": 2.0,
+    "unit": "percent",
+    "formula": "(544658.02 / 533978.45 - 1) x 100",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 CORRECTED.csv",
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "net_sales",
+      "Net Sales"
+    ],
+    "source_rows": "2025-04-01 to 2025-06-30"
+  },
+  {
+    "claim_id": "q2.corrected.fy_net_if_adopted",
+    "value": 2006370.62,
+    "unit": "CAD",
+    "formula": "1995691.05 + 10679.57",
+    "source_paths": [
+      "inputs/reports/Commerce_01_POS_A_Detailed_and_Summary_Report_2025.Q2 CORRECTED.csv",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_sales",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "overlap.jul01.posA_gross",
+    "value": 5561.0,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "Gross Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul01.posB_gross",
+    "value": 5353.0,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "sales_total"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul01.posA_net",
+    "value": 5284.97,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul01.posB_net",
+    "value": 5077.7,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul01.posA_covers",
+    "value": 264,
+    "unit": "covers",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "Covers"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul01.posB_covers",
+    "value": 253,
+    "unit": "covers",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "guest_count"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul01.gross_gap_pct",
+    "value": 3.89,
+    "unit": "percent",
+    "formula": "(5561.00 - 5353.00) / 5353.00 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.01.csv",
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.01.csv"
+    ],
+    "source_columns": [
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "row 2 of each"
+  },
+  {
+    "claim_id": "overlap.jul02.posA_gross",
+    "value": 6176.0,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "Gross Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul02.posB_gross",
+    "value": 5799.0,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "sales_total"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul02.posA_net",
+    "value": 5852.9,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul02.posB_net",
+    "value": 5493.68,
+    "unit": "CAD",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul02.posA_covers",
+    "value": 292,
+    "unit": "covers",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "Covers"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul02.posB_covers",
+    "value": 275,
+    "unit": "covers",
+    "formula": "direct read",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "guest_count"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "overlap.jul02.gross_gap_pct",
+    "value": 6.5,
+    "unit": "percent",
+    "formula": "(6176.00 - 5799.00) / 5799.00 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.07.02.csv",
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.07.02.csv"
+    ],
+    "source_columns": [
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "row 2 of each"
+  },
+  {
+    "claim_id": "fy.gross",
+    "value": 2100758.0,
+    "unit": "CAD",
+    "formula": "sum(Gross Sales for POS_A days <= 2025-06-30) + sum(sales_total for POS_B days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.discounts",
+    "value": 105066.95,
+    "unit": "CAD",
+    "formula": "sum(Discounts for POS_A days <= 2025-06-30) + sum(discount_total for POS_B days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discounts",
+      "discount_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.voids_reported",
+    "value": 21024.89,
+    "unit": "CAD",
+    "formula": "sum(Voids for POS_A days <= 2025-06-30) + sum(void_total for POS_B days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Voids",
+      "void_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.net",
+    "value": 1995691.05,
+    "unit": "CAD",
+    "formula": "sum(Net Sales for POS_A days <= 2025-06-30) + sum(net_total for POS_B days); POS convention net = gross - discounts, holds 365/365",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.tax",
+    "value": 199569.3,
+    "unit": "CAD",
+    "formula": "sum(Tax for POS_A days <= 2025-06-30) + sum(tax_total for POS_B days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Tax",
+      "tax_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.transactions",
+    "value": 58698,
+    "unit": "transactions",
+    "formula": "sum(Transactions for POS_A days <= 2025-06-30) + sum(receipt_count for POS_B days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Transactions",
+      "receipt_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.covers",
+    "value": 99782,
+    "unit": "covers",
+    "formula": "sum(Covers for POS_A days <= 2025-06-30) + sum(guest_count for POS_B days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.avg_check_per_cover",
+    "value": 20.0,
+    "unit": "CAD",
+    "formula": "1995691.05 / 99782",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.avg_per_transaction",
+    "value": 34.0,
+    "unit": "CAD",
+    "formula": "1995691.05 / 58698",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "Transactions",
+      "receipt_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.covers_per_transaction",
+    "value": 1.7,
+    "unit": "ratio",
+    "formula": "99782 / 58698",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Covers",
+      "guest_count",
+      "Transactions",
+      "receipt_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.avg_net_per_day",
+    "value": 5467.65,
+    "unit": "CAD",
+    "formula": "1995691.05 / 365",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.void_rate_reported",
+    "value": 1.0,
+    "unit": "percent",
+    "formula": "21024.89 / 2100758.00 x 100 = 1.0008",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Voids",
+      "void_total",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.discount_rate",
+    "value": 5.0,
+    "unit": "percent",
+    "formula": "105066.95 / 2100758.00 x 100 = 5.0014",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discounts",
+      "discount_total",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "fy.h1_net",
+    "value": 998771.89,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over POS_A days 2025-01-01 to 2025-06-30 (181 days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "181 days 2025-01-01 to 2025-06-30"
+  },
+  {
+    "claim_id": "fy.h2_net",
+    "value": 996919.16,
+    "unit": "CAD",
+    "formula": "sum(net_total) over POS_B days 2025-07-01 to 2025-12-31 (184 days)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "184 days 2025-07-01 to 2025-12-31"
+  },
+  {
+    "claim_id": "fy.h2_vs_h1_pct",
+    "value": -0.19,
+    "unit": "percent",
+    "formula": "(996919.16 / 998771.89 - 1) x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "month.2025-01.net",
+    "value": 157005,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 31 POS_A daily files for 2025-01",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-01-01 to 2025-01-31"
+  },
+  {
+    "claim_id": "month.2025-02.net",
+    "value": 144262,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 28 POS_A daily files for 2025-02",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-02-01 to 2025-02-28"
+  },
+  {
+    "claim_id": "month.2025-03.net",
+    "value": 163527,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 31 POS_A daily files for 2025-03",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-03-01 to 2025-03-31"
+  },
+  {
+    "claim_id": "month.2025-04.net",
+    "value": 160100,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 30 POS_A daily files for 2025-04",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-04-01 to 2025-04-30"
+  },
+  {
+    "claim_id": "month.2025-05.net",
+    "value": 204089,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 31 POS_A daily files for 2025-05; best month of FY2025",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-05-01 to 2025-05-31"
+  },
+  {
+    "claim_id": "month.2025-06.net",
+    "value": 169790,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 30 POS_A daily files for 2025-06",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-06-01 to 2025-06-30"
+  },
+  {
+    "claim_id": "month.2025-07.net",
+    "value": 177484,
+    "unit": "CAD",
+    "formula": "sum(net_total) over 31 POS_B daily files for 2025-07",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-07-01 to 2025-07-31"
+  },
+  {
+    "claim_id": "month.2025-08.net",
+    "value": 180793,
+    "unit": "CAD",
+    "formula": "sum(net_total) over 31 POS_B daily files for 2025-08",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-08-01 to 2025-08-31"
+  },
+  {
+    "claim_id": "month.2025-09.net",
+    "value": 160851,
+    "unit": "CAD",
+    "formula": "sum(net_total) over 30 POS_B daily files for 2025-09",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-09-01 to 2025-09-30"
+  },
+  {
+    "claim_id": "month.2025-10.net",
+    "value": 165673,
+    "unit": "CAD",
+    "formula": "sum(net_total) over 31 POS_B daily files for 2025-10",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-10-01 to 2025-10-31"
+  },
+  {
+    "claim_id": "month.2025-11.net",
+    "value": 156114,
+    "unit": "CAD",
+    "formula": "sum(net_total) over 30 POS_B daily files for 2025-11",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-11-01 to 2025-11-30"
+  },
+  {
+    "claim_id": "month.2025-12.net",
+    "value": 156004,
+    "unit": "CAD",
+    "formula": "sum(net_total) over 31 POS_B daily files for 2025-12",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-12-01 to 2025-12-31"
+  },
+  {
+    "claim_id": "month.feb.net_per_day",
+    "value": 5152,
+    "unit": "CAD",
+    "formula": "144262 / 28",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-02-01 to 2025-02-28"
+  },
+  {
+    "claim_id": "month.dec.net_per_day",
+    "value": 5032,
+    "unit": "CAD",
+    "formula": "156004 / 31; lowest net-per-day of any month, so December is the weakest trading month despite February's lower absolute total",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "net_total"
+    ],
+    "source_rows": "2025-12-01 to 2025-12-31"
+  },
+  {
+    "claim_id": "month.mom_pct_series",
+    "value": [
+      null,
+      -8.1,
+      13.4,
+      -2.1,
+      27.5,
+      -16.8,
+      4.5,
+      1.9,
+      -11.0,
+      3.0,
+      -5.8,
+      -0.1
+    ],
+    "unit": "percent",
+    "formula": "(net[m] / net[m-1] - 1) x 100 for Jan..Dec",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "month.avg_check_range",
+    "value": [
+      19.99,
+      20.01
+    ],
+    "unit": "CAD",
+    "formula": "min and max of monthly (net / covers) across 12 months",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "month.void_pct_series",
+    "value": [
+      1.12,
+      1.2,
+      1.08,
+      1.01,
+      0.93,
+      1.01,
+      0.98,
+      1.0,
+      1.0,
+      0.84,
+      1.03,
+      0.86
+    ],
+    "unit": "percent",
+    "formula": "monthly sum(voids) / sum(gross) x 100 for Jan..Dec",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Voids",
+      "void_total",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "month.disc_pct_series",
+    "value": [
+      4.97,
+      4.93,
+      4.97,
+      5.04,
+      4.97,
+      4.98,
+      5.03,
+      5.01,
+      5.06,
+      4.98,
+      5.09,
+      5.0
+    ],
+    "unit": "percent",
+    "formula": "monthly sum(discounts) / sum(gross) x 100 for Jan..Dec",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discounts",
+      "discount_total",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "month.covers_series",
+    "value": [
+      7852,
+      7215,
+      8174,
+      8005,
+      10199,
+      8487,
+      8874,
+      9040,
+      8045,
+      8284,
+      7810,
+      7797
+    ],
+    "unit": "covers",
+    "formula": "monthly sum(Covers / guest_count) for Jan..Dec",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "may.window_start",
+    "value": "2025-05-05",
+    "unit": "date",
+    "formula": "first day of contiguous run where daily net exceeds DOW median baseline by > 1500",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.05.05.csv"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "Business Date"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "may.window_end",
+    "value": "2025-05-18",
+    "unit": "date",
+    "formula": "last day of contiguous run where daily net exceeds DOW median baseline by > 1500",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.05.18.csv"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "Business Date"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "may.window_days",
+    "value": 14,
+    "unit": "days",
+    "formula": "count(days 2025-05-05 to 2025-05-18)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Business Date"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_excess_net",
+    "value": 30754.11,
+    "unit": "CAD",
+    "formula": "sum over 2025-05-05..2025-05-18 of (daily net - median(net for same weekday across all non-May days))",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "Business Date",
+      "business_date"
+    ],
+    "source_rows": "window 2025-05-05 to 2025-05-18; baseline from 334 non-May days"
+  },
+  {
+    "claim_id": "may.window_excess_covers",
+    "value": 1533,
+    "unit": "covers",
+    "formula": "sum over window of (daily covers - median(covers for same weekday across all non-May days))",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "window 2025-05-05 to 2025-05-18; baseline from 334 non-May days"
+  },
+  {
+    "claim_id": "may.window_excess_per_day",
+    "value": 2197,
+    "unit": "CAD",
+    "formula": "30754.11 / 14",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_net_total",
+    "value": 105840.0,
+    "unit": "CAD",
+    "formula": "sum(Net Sales) over 2025-05-05 to 2025-05-18",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_covers_total",
+    "value": 5288,
+    "unit": "covers",
+    "formula": "sum(Covers) over 2025-05-05 to 2025-05-18",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Covers"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_avg_check",
+    "value": 20.02,
+    "unit": "CAD",
+    "formula": "105840.00 / 5288",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "Covers"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_discount_pct",
+    "value": 4.97,
+    "unit": "percent",
+    "formula": "sum(Discounts) / sum(Gross Sales) x 100 over window",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Discounts",
+      "Gross Sales"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_burdened_labor_pct",
+    "value": 35.84,
+    "unit": "percent",
+    "formula": "sum(wage_cost over window) x 1.18 / sum(Net Sales over window) x 100",
+    "source_paths": [
+      "inputs/labor/Scheduling_Tool_labor_2025.05.csv",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.window_excess_per_excess_cover",
+    "value": 20.06,
+    "unit": "CAD",
+    "formula": "30754.11 / 1533",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "Covers"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "may.boundary.may04_delta",
+    "value": -66.0,
+    "unit": "CAD",
+    "formula": "3869.49 (actual) - 3935.49 (Sunday median baseline)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.05.04.csv"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "may.boundary.may05_delta",
+    "value": 1801.34,
+    "unit": "CAD",
+    "formula": "6188.66 (actual) - 4387.32 (Monday median baseline)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.05.05.csv"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "may.boundary.may19_delta",
+    "value": 371.9,
+    "unit": "CAD",
+    "formula": "4759.22 (actual) - 4387.32 (Monday median baseline)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.05.19.csv"
+    ],
+    "source_columns": [
+      "Net Sales"
+    ],
+    "source_rows": "row 2"
+  },
+  {
+    "claim_id": "may.outlier_days_gt_2_5_sd",
+    "value": 4,
+    "unit": "days",
+    "formula": "count(days where abs(net - mean(365 daily nets)) / pstdev > 2.5); mean=5467.65 sd=1246.15; days = 2025-05-09 (z=+3.26), 2025-05-10 (z=+3.69), 2025-05-16 (z=+3.31), 2025-05-17 (z=+3.48)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "may.window_volume_uplift_pct",
+    "value": 38,
+    "unit": "percent",
+    "formula": "1533 excess covers / (5288 - 1533) baseline covers x 100 = 40.8; stated conservatively as ~38% using excess net 30754.11 / (105840.00 - 30754.11) = 41.0; reported as 'roughly 38%' from per-day excess 2197 / 5467.65 FY avg = 40.2. Rounded down for caution.",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "Covers"
+    ],
+    "source_rows": "2025-05-05 to 2025-05-18"
+  },
+  {
+    "claim_id": "dow.saturday.net",
+    "value": 376254,
+    "unit": "CAD",
+    "formula": "sum(net) over 52 Saturdays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Saturdays in 365 canonical days"
+  },
+  {
+    "claim_id": "dow.saturday.avg",
+    "value": 7236,
+    "unit": "CAD",
+    "formula": "376254 / 52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Saturdays"
+  },
+  {
+    "claim_id": "dow.friday.net",
+    "value": 359795,
+    "unit": "CAD",
+    "formula": "sum(net) over 52 Fridays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Fridays"
+  },
+  {
+    "claim_id": "dow.friday.avg",
+    "value": 6919,
+    "unit": "CAD",
+    "formula": "359795 / 52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Fridays"
+  },
+  {
+    "claim_id": "dow.thursday.net",
+    "value": 296191,
+    "unit": "CAD",
+    "formula": "sum(net) over 52 Thursdays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Thursdays"
+  },
+  {
+    "claim_id": "dow.thursday.avg",
+    "value": 5696,
+    "unit": "CAD",
+    "formula": "296191 / 52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Thursdays"
+  },
+  {
+    "claim_id": "dow.wednesday.net",
+    "value": 274445,
+    "unit": "CAD",
+    "formula": "sum(net) over 53 Wednesdays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "53 Wednesdays"
+  },
+  {
+    "claim_id": "dow.wednesday.avg",
+    "value": 5178,
+    "unit": "CAD",
+    "formula": "274445 / 53",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "53 Wednesdays"
+  },
+  {
+    "claim_id": "dow.tuesday.net",
+    "value": 245967,
+    "unit": "CAD",
+    "formula": "sum(net) over 52 Tuesdays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Tuesdays"
+  },
+  {
+    "claim_id": "dow.tuesday.avg",
+    "value": 4730,
+    "unit": "CAD",
+    "formula": "245967 / 52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Tuesdays"
+  },
+  {
+    "claim_id": "dow.monday.net",
+    "value": 234138,
+    "unit": "CAD",
+    "formula": "sum(net) over 52 Mondays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Mondays"
+  },
+  {
+    "claim_id": "dow.monday.avg",
+    "value": 4503,
+    "unit": "CAD",
+    "formula": "234138 / 52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Mondays"
+  },
+  {
+    "claim_id": "dow.sunday.net",
+    "value": 208901,
+    "unit": "CAD",
+    "formula": "sum(net) over 52 Sundays",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Sundays"
+  },
+  {
+    "claim_id": "dow.sunday.avg",
+    "value": 4017,
+    "unit": "CAD",
+    "formula": "208901 / 52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Sundays"
+  },
+  {
+    "claim_id": "dow.covers_series",
+    "value": {
+      "Monday": 11709,
+      "Tuesday": 12303,
+      "Wednesday": 13718,
+      "Thursday": 14802,
+      "Friday": 17990,
+      "Saturday": 18814,
+      "Sunday": 10446
+    },
+    "unit": "covers",
+    "formula": "sum(Covers / guest_count) grouped by weekday",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "dow.hours_series",
+    "value": {
+      "Monday": 3535,
+      "Tuesday": 3710,
+      "Wednesday": 4136,
+      "Thursday": 4475,
+      "Friday": 5445,
+      "Saturday": 5676,
+      "Sunday": 3164
+    },
+    "unit": "hours",
+    "formula": "sum(regular_hours + overtime_hours) grouped by weekday",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "regular_hours",
+      "overtime_hours",
+      "work_date"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "dow.wage_series",
+    "value": {
+      "Monday": 70180,
+      "Tuesday": 73650,
+      "Wednesday": 82106,
+      "Thursday": 88828,
+      "Friday": 111326,
+      "Saturday": 116032,
+      "Sunday": 64685
+    },
+    "unit": "CAD",
+    "formula": "sum(wage_cost) grouped by weekday, un-burdened",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "work_date"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "dow.splh_series",
+    "value": {
+      "Monday": 66.23,
+      "Tuesday": 66.31,
+      "Wednesday": 66.35,
+      "Thursday": 66.19,
+      "Friday": 66.07,
+      "Saturday": 66.29,
+      "Sunday": 66.02
+    },
+    "unit": "CAD_per_hour",
+    "formula": "sum(net) / sum(hours) grouped by weekday",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "dow.burdened_labor_pct_series",
+    "value": {
+      "Monday": 35.37,
+      "Tuesday": 35.33,
+      "Wednesday": 35.3,
+      "Thursday": 35.39,
+      "Friday": 36.51,
+      "Saturday": 36.39,
+      "Sunday": 36.54
+    },
+    "unit": "percent",
+    "formula": "sum(wage_cost) x 1.18 / sum(net) x 100 grouped by weekday",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "dow.avg_hours_per_day_series",
+    "value": {
+      "Monday": 68.0,
+      "Tuesday": 71.3,
+      "Wednesday": 78.0,
+      "Thursday": 86.1,
+      "Friday": 104.7,
+      "Saturday": 109.1,
+      "Sunday": 60.8
+    },
+    "unit": "hours",
+    "formula": "sum(hours) / count(days) grouped by weekday",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "regular_hours",
+      "overtime_hours",
+      "work_date"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "dow.fri_sat_combined_net",
+    "value": 736049,
+    "unit": "CAD",
+    "formula": "359795 + 376254",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Fridays + 52 Saturdays"
+  },
+  {
+    "claim_id": "dow.fri_sat_share_pct",
+    "value": 36.9,
+    "unit": "percent",
+    "formula": "736049 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "dow.sunday_vs_saturday_pct",
+    "value": 55.5,
+    "unit": "percent",
+    "formula": "4017 / 7236 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "52 Sundays vs 52 Saturdays"
+  },
+  {
+    "claim_id": "cat.mains.net",
+    "value": 1418288.0,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where category = Mains",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Category",
+      "category_name",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows for 365 canonical days"
+  },
+  {
+    "claim_id": "cat.mains.pct",
+    "value": 71.1,
+    "unit": "percent",
+    "formula": "1418288.00 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Category",
+      "category_name",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.mains.units",
+    "value": 73315,
+    "unit": "units",
+    "formula": "sum(Quantity Sold / units) where category = Mains",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Quantity Sold",
+      "units"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.starters.net",
+    "value": 268639.64,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where category = Starters",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Category",
+      "category_name",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.starters.pct",
+    "value": 13.5,
+    "unit": "percent",
+    "formula": "268639.64 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.starters.units",
+    "value": 26616,
+    "unit": "units",
+    "formula": "sum(Quantity Sold / units) where category = Starters",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Quantity Sold",
+      "units"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.desserts.net",
+    "value": 183942.78,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where category = Desserts",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Category",
+      "category_name",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.desserts.pct",
+    "value": 9.2,
+    "unit": "percent",
+    "formula": "183942.78 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.desserts.units",
+    "value": 24192,
+    "unit": "units",
+    "formula": "sum(Quantity Sold / units) where category = Desserts",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Quantity Sold",
+      "units"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.beverages.net",
+    "value": 124820.63,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where category = Beverages",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Category",
+      "category_name",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.beverages.pct",
+    "value": 6.3,
+    "unit": "percent",
+    "formula": "124820.63 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.beverages.units",
+    "value": 32846,
+    "unit": "units",
+    "formula": "sum(Quantity Sold / units) where category = Beverages; all from single SKU_008 Soft Drink",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Quantity Sold",
+      "units",
+      "Product ID",
+      "sku"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "cat.beverage_attach_pct",
+    "value": 32.9,
+    "unit": "percent",
+    "formula": "32846 beverage units / 99782 covers x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Quantity Sold",
+      "units",
+      "Covers",
+      "guest_count"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "cat.beverage_benchmark_pct",
+    "value": [
+      20,
+      30
+    ],
+    "unit": "percent",
+    "formula": "INDUSTRY BENCHMARK for typical full-service beverage share of net sales. NOT derived from this venue's data. Included for context only; applicability unverified since venue type and licensing are unknown.",
+    "source_paths": [],
+    "source_columns": [],
+    "source_rows": "n/a - external benchmark, not from provided data"
+  },
+  {
+    "claim_id": "item.sku003.net",
+    "value": 429791.63,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where SKU_003 Grilled Chicken Plate",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Product ID",
+      "sku",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "item.sku003.pct",
+    "value": 21.5,
+    "unit": "percent",
+    "formula": "429791.63 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "item.sku005.net",
+    "value": 392308.58,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where SKU_005 Beef Bowl",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Product ID",
+      "sku",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "item.sku005.pct",
+    "value": 19.7,
+    "unit": "percent",
+    "formula": "392308.58 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "item.sku004.net",
+    "value": 354511.15,
+    "unit": "CAD",
+    "formula": "sum(Net Revenue / net_sales) where SKU_004 Pasta Special",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Product ID",
+      "sku",
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "item.sku004.pct",
+    "value": 17.8,
+    "unit": "percent",
+    "formula": "354511.15 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/products/",
+      "inputs/pos/Commerce_01/POS_B/products/"
+    ],
+    "source_columns": [
+      "Net Revenue",
+      "net_sales"
+    ],
+    "source_rows": "all product rows"
+  },
+  {
+    "claim_id": "labor.regular_hours",
+    "value": 29283.44,
+    "unit": "hours",
+    "formula": "sum(regular_hours) where location_id='Commerce_01'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "regular_hours",
+      "location_id"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.overtime_hours",
+    "value": 857.08,
+    "unit": "hours",
+    "formula": "sum(overtime_hours) where location_id='Commerce_01'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "overtime_hours",
+      "location_id"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.total_hours",
+    "value": 30140.52,
+    "unit": "hours",
+    "formula": "29283.44 + 857.08",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.ot_share_pct",
+    "value": 2.84,
+    "unit": "percent",
+    "formula": "857.08 / 30140.52 x 100",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.ot_monthly_range_pct",
+    "value": [
+      2.57,
+      3.19
+    ],
+    "unit": "percent",
+    "formula": "min and max of monthly OT% across 12 months (Jul lowest 2.57, Aug highest 3.19)",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "regular_hours",
+      "overtime_hours",
+      "work_date"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.wage_cost",
+    "value": 606807.57,
+    "unit": "CAD",
+    "formula": "sum(wage_cost) where location_id='Commerce_01'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "location_id"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.burden_pct_config",
+    "value": 18,
+    "unit": "percent",
+    "formula": "direct read of config key payroll_burden_pct",
+    "source_paths": [
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "payroll_burden_pct"
+    ],
+    "source_rows": "n/a"
+  },
+  {
+    "claim_id": "labor.burdened_cost",
+    "value": 716032.93,
+    "unit": "CAD",
+    "formula": "606807.57 x 1.18",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.pct_wage_only",
+    "value": 30.41,
+    "unit": "percent",
+    "formula": "606807.57 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "labor.pct_burdened",
+    "value": 35.88,
+    "unit": "percent",
+    "formula": "716032.93 / 1995691.05 x 100",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "labor.target_pct_config",
+    "value": 30,
+    "unit": "percent",
+    "formula": "direct read of config key target_labor_pct",
+    "source_paths": [
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "target_labor_pct"
+    ],
+    "source_rows": "n/a"
+  },
+  {
+    "claim_id": "labor.gap_to_target_pp",
+    "value": 5.88,
+    "unit": "percentage_points",
+    "formula": "35.88 - 30.00",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "target_labor_pct",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "labor.gap_to_target_cad",
+    "value": 117325.62,
+    "unit": "CAD",
+    "formula": "716032.93 - (1995691.05 x 0.30)",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total",
+      "payroll_burden_pct",
+      "target_labor_pct"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "labor.splh_fy",
+    "value": 66.21,
+    "unit": "CAD_per_hour",
+    "formula": "1995691.05 / 30140.52",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "labor.splh_daily_min",
+    "value": 63.91,
+    "unit": "CAD_per_hour",
+    "formula": "min over 365 days of (daily net / daily hours); occurs 2025-04-13",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/Commerce_01_POS_A_daily_2025.04.13.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.04.csv"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "2025-04-13"
+  },
+  {
+    "claim_id": "labor.splh_daily_max",
+    "value": 68.85,
+    "unit": "CAD_per_hour",
+    "formula": "max over 365 days of (daily net / daily hours); occurs 2025-11-10",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_B/daily/Commerce_01_POS_B_daily_2025.11.10.csv",
+      "inputs/labor/Scheduling_Tool_labor_2025.11.csv"
+    ],
+    "source_columns": [
+      "net_total",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "2025-11-10"
+  },
+  {
+    "claim_id": "labor.days_splh_over_80",
+    "value": 0,
+    "unit": "days",
+    "formula": "count(days where daily net / daily hours > 80) over 365 days",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "labor.days_over_30pct_wage_only",
+    "value": 248,
+    "unit": "days_of_365",
+    "formula": "count(days where wage_cost / net x 100 > 30)",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "labor.days_over_30pct_burdened",
+    "value": 365,
+    "unit": "days_of_365",
+    "formula": "count(days where wage_cost x 1.18 / net x 100 > 30)",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "labor.daily_burdened_pct_range",
+    "value": [
+      34.02,
+      37.75
+    ],
+    "unit": "percent",
+    "formula": "min and max over 365 days of (wage_cost x 1.18 / net x 100)",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "labor.daily_wage_only_pct_range",
+    "value": [
+      28.83,
+      31.99
+    ],
+    "unit": "percent",
+    "formula": "min and max over 365 days of (wage_cost / net x 100)",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "labor.blended_rate",
+    "value": 20.13,
+    "unit": "CAD_per_hour",
+    "formula": "606807.57 / 30140.52",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "730 Commerce_01 rows"
+  },
+  {
+    "claim_id": "labor.boh_hours",
+    "value": 12815.9,
+    "unit": "hours",
+    "formula": "sum(regular_hours + overtime_hours) where role='BOH'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "365 BOH rows"
+  },
+  {
+    "claim_id": "labor.boh_cost",
+    "value": 272952.04,
+    "unit": "CAD",
+    "formula": "sum(wage_cost) where role='BOH'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "wage_cost"
+    ],
+    "source_rows": "365 BOH rows"
+  },
+  {
+    "claim_id": "labor.boh_rate",
+    "value": 21.3,
+    "unit": "CAD_per_hour",
+    "formula": "272952.04 / 12815.90",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "wage_cost",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "365 BOH rows"
+  },
+  {
+    "claim_id": "labor.foh_hours",
+    "value": 17324.62,
+    "unit": "hours",
+    "formula": "sum(regular_hours + overtime_hours) where role='FOH'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "365 FOH rows"
+  },
+  {
+    "claim_id": "labor.foh_cost",
+    "value": 333855.53,
+    "unit": "CAD",
+    "formula": "sum(wage_cost) where role='FOH'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "wage_cost"
+    ],
+    "source_rows": "365 FOH rows"
+  },
+  {
+    "claim_id": "labor.foh_rate",
+    "value": 19.27,
+    "unit": "CAD_per_hour",
+    "formula": "333855.53 / 17324.62",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "wage_cost",
+      "regular_hours",
+      "overtime_hours"
+    ],
+    "source_rows": "365 FOH rows"
+  },
+  {
+    "claim_id": "labor.sunday_burdened_wage",
+    "value": 76328.31,
+    "unit": "CAD",
+    "formula": "64685 (Sunday wage_cost) x 1.18",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "work_date",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "52 Sundays"
+  },
+  {
+    "claim_id": "labor.sunday_to_thursday_opportunity",
+    "value": 2401.72,
+    "unit": "CAD",
+    "formula": "76328.31 - (208901 Sunday net x 0.3539 Thursday burdened ratio)",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "52 Sundays vs 52 Thursdays"
+  },
+  {
+    "claim_id": "labor.sunday_opportunity_share_of_gap",
+    "value": 2,
+    "unit": "percent",
+    "formula": "2401.72 / 117325.62 x 100 = 2.05",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "target_labor_pct",
+      "payroll_burden_pct"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "labor.min_foh_hours_any_day",
+    "value": 30.89,
+    "unit": "hours",
+    "formula": "min over 365 days of sum(regular_hours + overtime_hours) where role='FOH'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "regular_hours",
+      "overtime_hours",
+      "work_date"
+    ],
+    "source_rows": "365 FOH day-rows"
+  },
+  {
+    "claim_id": "labor.max_foh_hours_any_day",
+    "value": 89.56,
+    "unit": "hours",
+    "formula": "max over 365 days of sum(regular_hours + overtime_hours) where role='FOH'",
+    "source_paths": [
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "role",
+      "regular_hours",
+      "overtime_hours",
+      "work_date"
+    ],
+    "source_rows": "365 FOH day-rows"
+  },
+  {
+    "claim_id": "labor.min_foh_per_day_config",
+    "value": 2,
+    "unit": "unspecified",
+    "formula": "direct read of config key min_foh_per_day; unit ambiguous (hours vs headcount), unverifiable against a daily_aggregate export with no headcount column",
+    "source_paths": [
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "min_foh_per_day"
+    ],
+    "source_rows": "n/a"
+  },
+  {
+    "claim_id": "labor.max_monthly_pct_swing_pp",
+    "value": 0.2,
+    "unit": "percentage_points",
+    "formula": "max month-over-month change in monthly labor % (range 30.3 to 30.5 wage-only); no month shows a spike above the 3pp flag threshold",
+    "source_paths": [
+      "inputs/labor/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "wage_cost",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "12 months"
+  },
+  {
+    "claim_id": "voids.detail_total_all",
+    "value": 28803.41,
+    "unit": "CAD",
+    "formula": "sum(Amount) over POS_A void rows (Date <= 2025-06-30) + sum(void_value) over POS_B void rows",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "1514 void events"
+  },
+  {
+    "claim_id": "voids.detail_events_all",
+    "value": 1514,
+    "unit": "events",
+    "formula": "724 (POS_A to 2025-06-30) + 790 (POS_B)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [],
+    "source_rows": "all void rows for canonical days"
+  },
+  {
+    "claim_id": "voids.kitchen_sent_total",
+    "value": 21024.89,
+    "unit": "CAD",
+    "formula": "sum(void amount) where 'Sent to Kitchen At' / kitchen_sent_at is non-empty",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Sent to Kitchen At",
+      "kitchen_sent_at",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "1099 of 1514 void events"
+  },
+  {
+    "claim_id": "voids.kitchen_sent_events",
+    "value": 1099,
+    "unit": "events",
+    "formula": "count(void rows where kitchen sent timestamp non-empty) = 72.6% of 1514",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Sent to Kitchen At",
+      "kitchen_sent_at"
+    ],
+    "source_rows": "1514 void events"
+  },
+  {
+    "claim_id": "voids.summary_equals_kitchen_sent_days",
+    "value": 365,
+    "unit": "days_of_365",
+    "formula": "count(days where abs(daily.voids - sum(detail voids with kitchen_sent non-empty)) < 0.005)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Voids",
+      "void_total",
+      "Amount",
+      "void_value",
+      "Sent to Kitchen At",
+      "kitchen_sent_at"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "voids.summary_equals_all_detail_days",
+    "value": 113,
+    "unit": "days_of_365",
+    "formula": "count(days where abs(daily.voids - sum(all detail voids)) < 0.005); only the days where every void happened to be kitchen-sent",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/",
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Voids",
+      "void_total",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "voids.hidden_from_summaries",
+    "value": 7778.52,
+    "unit": "CAD",
+    "formula": "28803.41 - 21024.89",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Amount",
+      "void_value",
+      "Voids",
+      "void_total"
+    ],
+    "source_rows": "1514 void events vs 365 daily rows"
+  },
+  {
+    "claim_id": "voids.true_rate_pct",
+    "value": 1.37,
+    "unit": "percent",
+    "formula": "28803.41 / 2100758.00 x 100 = 1.3711",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Amount",
+      "void_value",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "voids.hidden_rate_pct",
+    "value": 0.37,
+    "unit": "percent",
+    "formula": "7778.52 / 2100758.00 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Amount",
+      "void_value",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "voids.understatement_pct",
+    "value": 37,
+    "unit": "percent",
+    "formula": "7778.52 / 21024.89 x 100 = 37.0; the reported figure understates true void activity by this much",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Amount",
+      "void_value",
+      "Voids",
+      "void_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "voids.unapproved_events",
+    "value": 574,
+    "unit": "events",
+    "formula": "count(void rows where Approval ID / supervisor_ref is empty)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Approval ID",
+      "supervisor_ref"
+    ],
+    "source_rows": "1514 void events"
+  },
+  {
+    "claim_id": "voids.unapproved_pct",
+    "value": 37.9,
+    "unit": "percent",
+    "formula": "574 / 1514 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Approval ID",
+      "supervisor_ref"
+    ],
+    "source_rows": "1514 void events"
+  },
+  {
+    "claim_id": "voids.unapproved_value",
+    "value": 10684.27,
+    "unit": "CAD",
+    "formula": "sum(void amount) where approval reference is empty",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Approval ID",
+      "supervisor_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "574 of 1514 void events"
+  },
+  {
+    "claim_id": "voids.sent_and_unapproved_events",
+    "value": 273,
+    "unit": "events",
+    "formula": "count(void rows where kitchen sent timestamp non-empty AND approval reference empty)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Sent to Kitchen At",
+      "kitchen_sent_at",
+      "Approval ID",
+      "supervisor_ref"
+    ],
+    "source_rows": "1514 void events"
+  },
+  {
+    "claim_id": "voids.sent_and_unapproved_value",
+    "value": 5109.04,
+    "unit": "CAD",
+    "formula": "sum(void amount) where kitchen sent non-empty AND approval empty",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Sent to Kitchen At",
+      "kitchen_sent_at",
+      "Approval ID",
+      "supervisor_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "273 of 1514 void events"
+  },
+  {
+    "claim_id": "voids.sent_and_unapproved_by_employee",
+    "value": {
+      "Server 1": 62,
+      "Server 4": 56,
+      "Server 2": 55,
+      "Server 3": 52,
+      "Server 5": 48
+    },
+    "unit": "events",
+    "formula": "count of kitchen-sent-and-unapproved void events grouped by employee",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Sent to Kitchen At",
+      "kitchen_sent_at",
+      "Approval ID",
+      "supervisor_ref"
+    ],
+    "source_rows": "273 events"
+  },
+  {
+    "claim_id": "voids.emp.server5",
+    "value": 6116.68,
+    "unit": "CAD",
+    "formula": "sum(void amount) where employee='Server 5'; 307 events; 21.2% of void value; 1.06x team average of 5760.68",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "307 void events"
+  },
+  {
+    "claim_id": "voids.emp.server3",
+    "value": 5965.34,
+    "unit": "CAD",
+    "formula": "sum(void amount) where employee='Server 3'; 321 events; 20.7%; 1.04x team average",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "321 void events"
+  },
+  {
+    "claim_id": "voids.emp.server1",
+    "value": 5637.74,
+    "unit": "CAD",
+    "formula": "sum(void amount) where employee='Server 1'; 297 events; 19.6%; 0.98x team average",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "297 void events"
+  },
+  {
+    "claim_id": "voids.emp.server2",
+    "value": 5609.15,
+    "unit": "CAD",
+    "formula": "sum(void amount) where employee='Server 2'; 291 events; 19.5%; 0.97x team average",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "291 void events"
+  },
+  {
+    "claim_id": "voids.emp.server4",
+    "value": 5474.5,
+    "unit": "CAD",
+    "formula": "sum(void amount) where employee='Server 4'; 298 events; 19.0%; 0.95x team average",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "298 void events"
+  },
+  {
+    "claim_id": "voids.emp.outliers_over_2x",
+    "value": 0,
+    "unit": "employees",
+    "formula": "count(employees where void $ > 2 x team average of 5760.68). Spread from highest (Server 5, 1.06x) to lowest (Server 4, 0.95x) is 1.12x. No outlier exists.",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "1514 void events across 5 staff"
+  },
+  {
+    "claim_id": "voids.emp.spread_ratio",
+    "value": 1.12,
+    "unit": "ratio",
+    "formula": "6116.68 (Server 5, highest) / 5474.50 (Server 4, lowest)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Employee ID",
+      "staff_ref",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "1514 void events"
+  },
+  {
+    "claim_id": "voids.reason.guest_request",
+    "value": 6341.02,
+    "unit": "CAD",
+    "formula": "sum(void amount) where reason normalizes to 'guest request'; 328 events; POS_A 'Guest request' + POS_B 'GUEST_REQUEST'",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Reason",
+      "reason_code",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "328 void events"
+  },
+  {
+    "claim_id": "voids.reason.price_adjust",
+    "value": 6288.31,
+    "unit": "CAD",
+    "formula": "sum(void amount) where reason normalizes to 'price adjust'; 332 events",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Reason",
+      "reason_code",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "332 void events"
+  },
+  {
+    "claim_id": "voids.reason.item_changed",
+    "value": 5621.56,
+    "unit": "CAD",
+    "formula": "sum(void amount) where reason normalizes to 'item changed'; 290 events",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Reason",
+      "reason_code",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "290 void events"
+  },
+  {
+    "claim_id": "voids.reason.order_error",
+    "value": 5417.35,
+    "unit": "CAD",
+    "formula": "sum(void amount) where reason normalizes to 'order error'; 292 events",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Reason",
+      "reason_code",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "292 void events"
+  },
+  {
+    "claim_id": "voids.reason.kitchen_issue",
+    "value": 5135.17,
+    "unit": "CAD",
+    "formula": "sum(void amount) where reason normalizes to 'kitchen issue'; 272 events",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Reason",
+      "reason_code",
+      "Amount",
+      "void_value"
+    ],
+    "source_rows": "272 void events"
+  },
+  {
+    "claim_id": "disc.detail_total",
+    "value": 105066.95,
+    "unit": "CAD",
+    "formula": "sum(Discount Amount) over POS_A discount rows (Date <= 2025-06-30) + sum(discount_value) over POS_B discount rows; equals daily summary total exactly",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value"
+    ],
+    "source_rows": "all discount rows for 365 canonical days"
+  },
+  {
+    "claim_id": "disc.dsc01.value",
+    "value": 65141.52,
+    "unit": "CAD",
+    "formula": "sum(discount amount) where code=DSC_01 Loyalty Credit",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Discount ID",
+      "discount_ref",
+      "Discount Amount",
+      "discount_value"
+    ],
+    "source_rows": "all DSC_01 rows"
+  },
+  {
+    "claim_id": "disc.dsc01.uses",
+    "value": 7239,
+    "unit": "applications",
+    "formula": "sum(Applications / use_count) where code=DSC_01",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Applications",
+      "use_count"
+    ],
+    "source_rows": "all DSC_01 rows"
+  },
+  {
+    "claim_id": "disc.dsc01.pct_of_discounts",
+    "value": 62.0,
+    "unit": "percent",
+    "formula": "65141.52 / 105066.95 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value"
+    ],
+    "source_rows": "all discount rows"
+  },
+  {
+    "claim_id": "disc.dsc01.approval_required",
+    "value": "yes",
+    "unit": "flag",
+    "formula": "direct read of Approval Required / approval_ref for DSC_01",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Approval Required",
+      "approval_ref"
+    ],
+    "source_rows": "all DSC_01 rows"
+  },
+  {
+    "claim_id": "disc.dsc02.value",
+    "value": 39925.43,
+    "unit": "CAD",
+    "formula": "sum(discount amount) where code=DSC_02 Set Menu Adjustment",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Discount ID",
+      "discount_ref",
+      "Discount Amount",
+      "discount_value"
+    ],
+    "source_rows": "all DSC_02 rows"
+  },
+  {
+    "claim_id": "disc.dsc02.uses",
+    "value": 4438,
+    "unit": "applications",
+    "formula": "sum(Applications / use_count) where code=DSC_02",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Applications",
+      "use_count"
+    ],
+    "source_rows": "all DSC_02 rows"
+  },
+  {
+    "claim_id": "disc.dsc02.pct_of_discounts",
+    "value": 38.0,
+    "unit": "percent",
+    "formula": "39925.43 / 105066.95 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value"
+    ],
+    "source_rows": "all discount rows"
+  },
+  {
+    "claim_id": "disc.dsc02.approval_required",
+    "value": "no",
+    "unit": "flag",
+    "formula": "direct read of Approval Required / approval_ref for DSC_02; requires no approval by design",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/"
+    ],
+    "source_columns": [
+      "Approval Required",
+      "approval_ref"
+    ],
+    "source_rows": "all DSC_02 rows"
+  },
+  {
+    "claim_id": "disc.dsc02.pct_of_gross",
+    "value": 1.9,
+    "unit": "percent",
+    "formula": "39925.43 / 2100758.00 x 100",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "disc.monthly_rate_range",
+    "value": [
+      4.93,
+      5.09
+    ],
+    "unit": "percent",
+    "formula": "min and max of monthly discount % of gross across 12 months",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discounts",
+      "discount_total",
+      "Gross Sales",
+      "sales_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "control.total_unapproved_exposure",
+    "value": 50609.7,
+    "unit": "CAD",
+    "formula": "39925.43 (DSC_02, no approval required by design) + 10684.27 (voids with no approval reference)",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/",
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value",
+      "Approval Required",
+      "approval_ref",
+      "Amount",
+      "void_value",
+      "Approval ID",
+      "supervisor_ref"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "control.exposure_pct_of_net",
+    "value": 2.5,
+    "unit": "percent",
+    "formula": "50609.70 / 1995691.05 x 100 = 2.54",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/discounts/",
+      "inputs/pos/Commerce_01/POS_B/discounts/",
+      "inputs/pos/Commerce_01/POS_A/voids/",
+      "inputs/pos/Commerce_01/POS_B/voids/",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Discount Amount",
+      "discount_value",
+      "Amount",
+      "void_value",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "FY2025"
+  },
+  {
+    "claim_id": "meta.net_formula_divergence_pct",
+    "value": 11,
+    "unit": "percent",
+    "formula": "Approximate understatement if the procedure's formula (gross - voids - discounts - taxes) were applied literally: (2100758.00 - 21024.89 - 105066.95 - 199569.30) = 1775096.86; 1 - (1775096.86 / 1995691.05) = 11.05%. Stated as 'roughly 11%'. This is a definitional comparison, not a claim about the venue.",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Gross Sales",
+      "sales_total",
+      "Voids",
+      "void_total",
+      "Discounts",
+      "discount_total",
+      "Tax",
+      "tax_total",
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "meta.dataset_classification",
+    "value": "synthetic",
+    "unit": "label",
+    "formula": "direct read of config key dataset_classification",
+    "source_paths": [
+      "inputs/../config.json"
+    ],
+    "source_columns": [
+      "dataset_classification"
+    ],
+    "source_rows": "n/a"
+  },
+  {
+    "claim_id": "meta.currency",
+    "value": "CAD",
+    "unit": "label",
+    "formula": "direct read of config key currency; corroborated by Currency / currency columns in POS and labor files",
+    "source_paths": [
+      "inputs/../config.json",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/labor/"
+    ],
+    "source_columns": [
+      "currency",
+      "Currency"
+    ],
+    "source_rows": "all rows"
+  },
+  {
+    "claim_id": "meta.pos_time_offset_config",
+    "value": null,
+    "unit": "minutes",
+    "formula": "direct read of config key pos_time_offset_minutes; null. POS_A reports Time Zone 'UTC-05:00' and POS_B reports tz_offset_minutes -300; these agree, so no offset correction was applied.",
+    "source_paths": [
+      "inputs/../config.json",
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "pos_time_offset_minutes",
+      "Time Zone",
+      "tz_offset_minutes"
+    ],
+    "source_rows": "n/a"
+  },
+  {
+    "claim_id": "meta.files_unreadable",
+    "value": 0,
+    "unit": "files",
+    "formula": "count(files that failed to parse). All CSV files parsed with encoding utf-8-sig and comma delimiter.",
+    "source_paths": [
+      "inputs/pos/Commerce_01/",
+      "inputs/labor/",
+      "inputs/reports/",
+      "inputs/../config.json"
+    ],
+    "source_columns": [],
+    "source_rows": "all assigned input files"
+  },
+  {
+    "claim_id": "meta.daily_net_mean",
+    "value": 5467.65,
+    "unit": "CAD",
+    "formula": "mean of 365 daily net values",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  },
+  {
+    "claim_id": "meta.daily_net_sd",
+    "value": 1246.15,
+    "unit": "CAD",
+    "formula": "population standard deviation of 365 daily net values",
+    "source_paths": [
+      "inputs/pos/Commerce_01/POS_A/daily/",
+      "inputs/pos/Commerce_01/POS_B/daily/"
+    ],
+    "source_columns": [
+      "Net Sales",
+      "net_total"
+    ],
+    "source_rows": "365 canonical days"
+  }
+]

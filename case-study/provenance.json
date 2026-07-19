@@ -1,0 +1,47 @@
+{
+  "case_study": "commerce-01-performance-audit-loop",
+  "classification": "synthetic",
+  "fixture": {
+    "generator": "generate_fixture.py",
+    "seed": 271828,
+    "deterministic": true,
+    "input_files": 4420,
+    "manifest_rows": 4421,
+    "oracle_isolated_from_inputs": true
+  },
+  "phases": {
+    "v1": {
+      "specialists": ["data-analyst", "owner-calibrator", "traffic-scout"],
+      "synthesis": "blueprint-builder",
+      "oracle_and_feedback_excluded_from_inputs": "asserted by run setup, not independently verifiable",
+      "canonical_first_run": true
+    },
+    "v2": {
+      "trigger": "owner-feedback.md",
+      "prompts_amended": [
+        "performance-audit/agents/data-analyst.md",
+        "performance-audit/agents/blueprint-builder.md",
+        "food-cost-sentinel/agents/variance-detective.md"
+      ],
+      "amendment_diff": "diffs/prompt-amendment.diff",
+      "re_ran": ["data-analyst", "blueprint-builder"],
+      "carried_unchanged": ["owner-calibrator", "traffic-scout"]
+    }
+  },
+  "receipts": "runs/{v1,v2}/<agent>/{effective-prompt.txt,prompt.sha256,output.sha256}",
+  "attestation_level": "self-recorded",
+  "classification_note": "Synthetic reconstructed demonstration, not evidence of a captured live execution. See README.md and RUN_NOTES.md.",
+  "notes": "The fixture is deterministic: regenerating it produces byte-identical files (a property of generate_fixture.py, checked by hash). This does NOT extend to the agent outputs, whose hashes are only an audit trail of the published files. The published outputs are annotated versions: each carries a review banner and the client blueprint has one neutralized sentence; no pristine byte-identical capture of the raw emission was kept. The operator review is in CORRECTIONS.md.",
+  "honest_limits": [
+    "All data synthetic. No real client, revenue, labor, or person.",
+    "Reconstruction, not a captured live run: no raw transcripts, no per-invocation input manifests, no runtime/session logs, no external chronology. Hashes could postdate the outputs.",
+    "The V1 false-accusation error the design expected did not occur; the prompt refused it.",
+    "owner-answers.md answered the wrong questionnaire; disclosed, not patched.",
+    "Operator equals fixture designer: simulated operator feedback, not two independent parties.",
+    "V2 re-ran only Data Analyst and Blueprint Builder; Owner Calibrator and Traffic Scout were carried over.",
+    "Review found four substantive errors in the drafts (unequal-period +2.99% trend that is actually an indeterminate cross-POS direction, overstated event dollars, wrong data tier, void-loss language). Corrected in CORRECTIONS.md; the draft text is left under a review banner.",
+    "Claims JSON and HTML are outside the receipt hashes.",
+    "Self-recorded receipts are an audit trail, not cryptographic proof.",
+    "Does not retroactively change older repository commits."
+  ]
+}

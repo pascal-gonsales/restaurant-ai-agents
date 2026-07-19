@@ -1,0 +1,3 @@
+__pycache__/
+*.pyc
+tests/forbidden_terms.private.txt

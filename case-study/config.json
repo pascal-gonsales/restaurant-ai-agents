@@ -1,0 +1,8 @@
+{
+  "dataset_classification": "synthetic",
+  "payroll_burden_pct": 18,
+  "min_foh_per_day": 2,
+  "target_labor_pct": 30,
+  "pos_time_offset_minutes": null,
+  "currency": "CAD"
+}
