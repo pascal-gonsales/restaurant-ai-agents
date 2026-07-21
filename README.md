@@ -31,8 +31,10 @@ Three teams, twelve agents (four each), one shared architecture contract:
   data into a Next Year Blueprint: recommended operating days and hours, an
   SPLH-based staffing template, the top revenue actions ranked by annual dollar
   impact, cost-control flags, and a mandatory data-quality section. A small
-  Python tool (`scripts/traffic_scout.py`) pulls public foot-traffic
-  (popular-times) data for the venue and nearby competitors.
+  Python tool (`scripts/traffic_scout.py`) is a configurable adapter that can pull
+  public foot-traffic (popular-times) data for the venue and nearby competitors
+  from a compatible API. No provider integration ships with the repo; the default
+  endpoint is a placeholder (`api.example.com`).
 - **Demo Builder** (`demo-builder/`) generates a personalized Operations
   Intelligence Report for a sales prospect using only public-style data
   (reviews, menu, business profile). It is a pre-sales tool: show a prospect
@@ -65,8 +67,9 @@ trustworthy enough to act on. Every one of the twelve prompts carries a numbered
 - **No invention.** Missing data is declared (`DATA NOT PROVIDED`, `UNREADABLE`,
   `INCOMPUTABLE`, `INSUFFICIENT_DATA`, `UNMAPPED`) and skipped. A blank cell is
   better than a fake number.
-- **Source-traced numbers.** Every figure cites a file, cell, row, or computed
-  delta.
+- **Source-traced numbers.** Each figure must cite a file, cell, row, or computed
+  delta. This is the rule the prompts enforce; the case study shows where a draft
+  slipped and the review caught it.
 - **Estimates labeled as estimates,** with the method and inputs stated, and
   ranges when uncertain.
 - **A mandatory data-quality section** listing every gap, assumption, and
@@ -182,7 +185,9 @@ runtime. Real values live in the user's local data folder, never in the repo.
 
 ## Security and development
 
-This repository was built clean-room: it contains only synthetic demo data and no real client, venue, or financial information. Two gates keep it that way. A local pre-commit hook blocks any commit that contains a private real-data token, and a CI workflow (`.github/workflows/secret-scan.yml`) runs gitleaks on every push and pull request and fails on any secret or credential finding.
+This repository contains only synthetic demo data and no real client, venue, or financial information. A CI workflow (`.github/workflows/secret-scan.yml`) runs gitleaks on every push and pull request and fails on any secret or credential finding. My local development setup also uses an untracked private-data blocklist that flags my own venture and client names before they can be committed.
+
+Earlier commits reference WwithAI, my own venture brand. The repository is kept brand-neutral (agents use a `{{REPORT_BRAND}}` placeholder) so the examples are reusable; no client identity is involved. This is an AI-assisted build (see the note above about Claude Code); I defined the problem, the rules, and the acceptance criteria, and I am accountable for what ships, including the errors the case study review documents.
 
 ## License
 
